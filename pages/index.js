@@ -4,9 +4,9 @@ import Footer from "@/components/footer"
 import Link from "next/link";
 
 export default function Home() {
-  const hendleCOnter = () =>{
+  // const hendleCOnter = () =>{
 
-  }
+  // }
   return (
     <>
       <div id="home_page">
