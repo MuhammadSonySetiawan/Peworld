@@ -33,7 +33,7 @@ function HomeAkun() {
           <div className="card p-1 mb-3 ">
             <div className="d-flex justify-content-between align-items-center flex-wrap mt-2">
               <div className="d-flex">
-                <img src="/fotoProfile.webp" alt="foto profile" className="rounded-circle img-fluid" style={{ width: "150px", height: "150px", borderRadius: "50%" }}></img>
+                <img src="/fotoProfile.webp" alt="foto profile" className="rounded-circle img-fluid" style={{ width: "150px", height: "150px", borderRadius: "50%" }}/>
 
                 <div>
                   <h5>Louis Tomlinson</h5>
@@ -60,7 +60,7 @@ function HomeAkun() {
 
             <div className="d-flex justify-content-between align-items-center flex-wrap">
               <div className="d-flex">
-                <img src="/fotoProfile.webp" alt="foto profile" className="rounded-circle img-fluid" style={{ width: "150px", height: "150px", borderRadius: "50%" }}></img>
+                <img src="/fotoProfile.webp" alt="foto profile" className="rounded-circle img-fluid" style={{ width: "150px", height: "150px", borderRadius: "50%" }}/>
 
                 <div>
                   <h5>Louis Tomlinson</h5>

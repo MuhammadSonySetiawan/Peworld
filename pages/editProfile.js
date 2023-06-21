@@ -30,8 +30,7 @@ function EditProfile() {
                   />
                 </div>
                 <p className="text-muted text-center mt-3 " style={{ fontSize: "18px" }}>
-                  {" "}
-                  Edit{" "}
+                  Edit
                 </p>
                 <h5 style={{ fontSize: "20px", marginTop: "30px" }}>Louis Tomlinson</h5>
                 <p style={{ fontSize: "14px" }}>Web Developer</p>
