@@ -4,7 +4,9 @@ import Footer from "@/components/footer"
 import Link from "next/link";
 
 export default function Home() {
+  const hendleCOnter = () =>{
 
+  }
   return (
     <>
       <div id="home_page">
@@ -21,6 +23,7 @@ export default function Home() {
               <Link href="/register">
                 <button className="btn btn-primary btn-lg">Mulai Dari Sekarang</button>
               </Link>
+              {/* <button className="btn btn-primary btn-lg" onClick={}>conter :</button> */}
             </div>
 
             <div className="col-md-5 mb-3">
