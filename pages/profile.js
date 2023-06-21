@@ -75,8 +75,8 @@ let company = [...new Array(2)];
                     </div>
 
                     <div className="col col-md-10">
-                      <h5 className="mb-0">Trainer</h5>
-                      <p className="mb-0">Pijar Camp</p>
+                      <h5 className="mb-0">Web Developer</h5>
+                      <p className="mb-0">Tokopedia</p>
                       <div className="d-flex align-items-center">
                         <p style={{ color: "#9EA0A5" }}>July 2019 - January 2020</p>
                         <p style={{ marginLeft: "30px", color: "#9EA0A5" }}>6 months</p>
