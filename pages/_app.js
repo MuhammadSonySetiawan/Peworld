@@ -3,7 +3,7 @@ import "@/styles/index.scss";
 
 import Script from "next/script";
 import { Provider } from "react-redux";
-import { store } from "@/pages/store";
+import { store } from "@/store";
 
 export default function App({ Component, pageProps }) {
   return (
