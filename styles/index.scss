@@ -1,0 +1,47 @@
+@import "./home.scss";
+@import "./profile.scss";
+@import "./NavbarAfterLogin.scss";
+@import "./login.scss";
+
+$primary: #5E50A1;
+
+*{
+font-family: Montserrat;
+}
+
+.btn-primary {
+    background-color: $primary;
+    border-color: $primary;
+
+    &:hover {
+        border-color: $primary;
+        background-color: $primary;
+    }
+}
+
+.btn-outline-primary {
+    border-color: $primary;
+    color: $primary;
+
+     &:hover {
+        border-color: $primary;
+        background-color: $primary;
+    }
+}
+
+.bg-primary {
+    background-color: $primary !important;
+}
+
+.content-to-center {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.nav-underline {
+   .nav-item {
+     border-color: $primary !important;
+        border-bottom: 1px solid;
+   }
+}

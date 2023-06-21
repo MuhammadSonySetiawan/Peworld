@@ -1,0 +1,29 @@
+#home_page{
+    @media only screen and (max-width: 768px) {
+        .bgHome{
+          transform: rotate(0) !important;
+          z-index: -2;
+          top: 0;
+          left: 0;
+         width: 100% !important;
+         height: 108% !important;
+         margin: 0;
+
+        }  
+
+        .bgButton{
+            width: 85% !important;
+            height: 80px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .bgButtonDown{
+            display: flex !important;
+            justify-content: center !important;
+            width: 80% !important;
+            margin-left: 25px;
+            margin-bottom: 10px;
+        }
+    }
+}

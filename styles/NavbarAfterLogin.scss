@@ -1,0 +1,36 @@
+#NavbarAfterLogin{
+    .dropbtn {
+        cursor: pointer;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdownContent {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 100px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        padding: 5px;
+    }
+
+    .dropdownContent Link {
+        color: black;
+        padding: 100px 100px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdownContent Link:hover {
+        background-color: #f1f1f1;
+        margin-bottom: 10px;
+    }
+
+    .dropdown:hover .dropdownContent {
+        display: block;
+    }
+}
