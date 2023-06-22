@@ -66,14 +66,14 @@ function Registrasi() {
 
               <div class="mb-5">
                 <label for="exampleInputPassword1" class="form-label">
-                  Password
+                  Email
                 </label>
                 <input type="enail" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Masukan alamat email" onChange={(e) => setPassword(e.target.value)} required />
               </div>
 
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">
-                  No HendPhone
+                  No Hendphone
                 </label>
                 <input type="text" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan no handphone" onChange={(e) => setPhone(e.target.value)} required />
               </div>
