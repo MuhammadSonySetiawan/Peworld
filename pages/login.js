@@ -1,33 +1,66 @@
 import Link from "next/link";
 import React from "react";
 import axios from "axios";
+
 import { useRouter } from "next/router";
+import {useSelector} from "react-redux";
+import { useDispatch } from "react-redux";
+import { eddAuth } from "@/store/reducers/dataAuth";
+
+
 function Login() {
       const router = useRouter();
+      const state = useSelector((state) => state)
+      const dispatch = useDispatch()
 
       const [email, setEmail] = React.useState("");
       const [password, setPassword] = React.useState("");
       const [errMsg, setErrMsg] = React.useState(null);
 
+      React.useEffect(() => {
+        // const storedToken = localStorage.getItem("auth")
+        // console.log(storedToken)
+
+        if (Object.keys(state.dataAuth.data).length != 0) {
+          router.push("profile");
+        }
+        
+        // if(localStorage.getItem("auth") == "True"){
+        //   router.push("/profile")
+        // }
+      })
+
       const handleLogin = (event) => {
         event.preventDefault();
 
         axios
-          .post("/api/auth/login", { email, password })
-          .then((response) => {
-            localStorage.setItem("token", response?.data?.token);
-
-            router.replace("/homeAkun");
+          .post("https://hire-job.onrender.com/v1/auth/login", {
+            email,
+            password,
           })
-          .catch(({ response }) => {
-            setErrMsg(response?.data?.message ?? "Something wrong in our server");
+          .then((response) => {
+            const token = response?.data?.data.token
+            console.log(response.data.data.user);
+                dispatch(eddAuth(response.data.data.user))
+                // localStorage.setItem("user", "True");
+                localStorage.setItem("token", token);
+                console.log(token);
+
+                // token = response?.data?.data.token
+                // console.log(response?.data?.data.token);
+                // document.cookie = `token= ${token}; path=/dashnboard`;
+
+                router.push("/profile");
+          })
+          .catch(({ error }) => {
+            setErrMsg(error?.response?.data?.message ?? "Something wrong in our server");
           });
       };
 
     return (
-      <main id="login_page" className="container">
+      <div  >
+      <main id="login_page" className="container" >
         <div className="row align-items-center mt-3">
-
           <div className="col col-md-6">
             <div style={{ position: "relative" }}>
               <div
@@ -53,27 +86,27 @@ function Login() {
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
 
             {errMsg ? (
-              <div class="alert alert-danger" role="alert">
+              <div className="alert alert-danger" role="alert">
                 {errMsg}
               </div>
             ) : null}
 
             <form onSubmit={handleLogin}>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">
+              <div className="mb-3">
+                <label for="exampleInputEmail1" className="form-label">
                   Email address
                 </label>
-                <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan alamat email" onChange={(e) => setEmail(e.target.value)} required />
+                <input type="email" className="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan alamat email" onChange={(e) => setEmail(e.target.value)} required />
               </div>
-              <div class="mb-5">
-                <label for="exampleInputPassword1" class="form-label">
+              <div className="mb-5">
+                <label for="exampleInputPassword1" className="form-label">
                   Password
                 </label>
-                <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Masukan kata sandi" onChange={(e) => setPassword(e.target.value)} required />
+                <input type="password" className="form-control form-control-lg" id="exampleInputPassword1" placeholder="Masukan kata sandi" onChange={(e) => setPassword(e.target.value)} required />
               </div>
 
               <div className="d-grid">
-                <button type="submit" class="btn btn-primary btn-lg">
+                <button type="submit" className="btn btn-primary btn-lg">
                   Submit
                 </button>
               </div>
@@ -88,6 +121,7 @@ function Login() {
           </div>
         </div>
       </main>
+      </div>
     );
 }
 

@@ -8,7 +8,7 @@ import { store } from "@/store";
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-7G8S2BB6LG" />
+      {/* <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-7G8S2BB6LG" />
       <Script
         id="google-analytics"
         strategy="afterInteractive"
@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }) {
           });
         `,
         }}
-      /> 
+      />  */}
 
        <Provider store={store}>
         <Component {...pageProps} />

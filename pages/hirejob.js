@@ -1,16 +1,30 @@
-import React from 'react'
+import React from 'react';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import Link from 'next/link';
 
 import Footer from '@/components/footer';
-import NavbarAfterLogin from '@/components/navbarAfterLogin';
+import Navbar from '@/components/navbar';
 
 import { BiMap } from "react-icons/bi";
 
 function Hirejob() {
+const [user, setUser] = React.useState("")
+const state = useSelector((state) => state)
+const router = useRouter()
+
+React.useEffect(() =>{
+  if(Object.keys(state.dataAuth.data).lenght == 0){
+    router.push("/login")
+  }else{
+    setUser(state.dataAuth.data)
+  }
+})
+
     return (
       <div style={{ backgroundColor: "#E5E5E5" }}>
         {/* start navbar */}
-        <NavbarAfterLogin />
+        <Navbar />
         {/* end navbar */}
 
         {/* start content */}
@@ -21,7 +35,7 @@ function Hirejob() {
               <div className="card p-4">
                 <div className="d-flex justify-content-center">
                   <img
-                    src="/fotoProfile.webp"
+                    src={user.photo}
                     alt="profile"
                     style={{
                       height: "150px",
@@ -31,18 +45,18 @@ function Hirejob() {
                   />
                 </div>
 
-                <h1 style={{ fontSize: "30px", marginTop: "30px" }}>Louis Tomlinson</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum erat orci, mollis nec gravida sed, ornare quis urna.</p>
+                <h1 style={{ fontSize: "30px", marginTop: "30px" }}>{user.fullname}</h1>
+                <p>{user.job_title}</p>
                 <p classname="text-muted">
-                  <BiMap /> Purwokerto, Jawa Tengah
+                  <BiMap /> {user.domicile}
                 </p>
 
-                <p className="text-black-50">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum erat orci, mollis nec gravida sed, ornare quis urna. Curabitur eu lacus fringilla, vestibulum risus at.</p>
+                <p className="text-black-50">{user.description}</p>
 
                 <h2 style={{ fontSize: "25px" }}>Skills</h2>
 
                 <div className="d-inline">
-                  {["Phyton", "Laravel", "Golang", "Ruby", "Rust", "Javascript", "Express"].map((item, key) => (
+                  {user?.skills?.map((item, key) => (
                     <span key={key} class="badge bg-warning m-1 p-2 ">
                       {item}
                     </span>

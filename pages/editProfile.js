@@ -1,14 +1,85 @@
 import React from 'react';
 import Link from "next/link";
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux'; 
 
-import NavbarAfterLogin from "@/components/navbarAfterLogin";
+import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
+import axios from 'axios';
+import Swal from "sweetalert2";
+import { eddAuth } from '@/store/reducers/dataAuth';
+
 function EditProfile() {
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const state = useSelector((state) => state)
+  const [user, setUser] = React.useState("")
+
+  const [name, setName] = React.useState("");
+  const [tempatKerja, setTempatKerja] = React.useState("");
+  const [jobDesk, setJobDesk] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [deskripi, setDeskripi] = React.useState("");
+  const [domisili, setDomisili] = React.useState("");
+
+  const [skill, setSkill] = React.useState("");
+
+  React.useEffect(() => {
+    if(Object.keys(state.dataAuth.data) == 0){
+      router.push("/login")
+    }else{
+      setUser(state.dataAuth.data)
+      
+    }
+  })
+
+  const hendleUpdate = () =>{
+    // console.log(state.dataAuth)
+
+    axios
+      .put("https://hire-job.onrender.com/v1/profile", {
+        fullname: name ?? data.fullname,
+        company: tempatKerja ?? data.company,
+        job_title: jobDesk ?? data.job_title,
+        phone: phone ?? data.phone,
+        description: deskripi ?? data.description,
+        domicile: domisili ?? data.domicile,
+      })
+      .then(( response ) => {
+        console.log(response.config.data);
+        Swal.fire({
+          title: "Update Success!",
+          text: "Update Success ",
+          icon: "success",
+        });
+          // dispatch(eddAuth(response.data.data.user));
+          // console.log(response)
+          router.push("/profile");
+
+        axios
+        .get("https://hire-job.onrender.com/v1/profile",)
+        .then((response) => {
+          console.log(eddAuth(response));
+          // dispatch(eddAuth(response.data.data.user));
+
+          router.push("/profile");
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Error!",
+          text: error?.response?.data?.message ?? "Something wrong Update!",
+          icon: "error",
+        });
+      });
+  }
+
     return (
       <div id="edit-profile_page" style={{ backgroundColor: "#E5E5E5" }}>
         {/* Strat navbar */}
-        <NavbarAfterLogin />
+        <Navbar />
         <div style={{ height: "50%", width: "100%" }}>
           <div className="bg-primary position-absolute" style={{ height: "250px", width: "100%" }}></div>
         </div>
@@ -20,7 +91,7 @@ function EditProfile() {
               <div className="card p-4">
                 <div className="d-flex justify-content-center">
                   <img
-                    src="/fotoProfile.webp"
+                    src={user.photo}
                     alt="profile"
                     style={{
                       height: "150px",
@@ -32,16 +103,16 @@ function EditProfile() {
                 <p className="text-muted text-center mt-3 " style={{ fontSize: "18px" }}>
                   Edit
                 </p>
-                <h5 style={{ fontSize: "20px", marginTop: "30px" }}>Louis Tomlinson</h5>
-                <p style={{ fontSize: "14px" }}>Web Developer</p>
+                <h5 style={{ fontSize: "20px", marginTop: "30px" }}>{user.fullname}</h5>
+                <p style={{ fontSize: "14px" }}>{user.job_title}</p>
 
                 <p className="text-muted-50" style={{ fontSize: "14px" }}>
-                  Purwokerto, Jawa Tengah
+                  {user.domicile}
                 </p>
               </div>
               <div className="d-flex flex-column">
-                <Link href="/profile" className="btn-lg">
-                  <button className="btn btn-primary btn-lg mt-4 mb-2" style={{ width: "100%" }}>
+                <Link href="" className="btn-lg">
+                  <button className="btn btn-primary btn-lg mt-4 mb-2" style={{ width: "100%" }} onClick={hendleUpdate}>
                     Simpan
                   </button>
                 </Link>
@@ -71,27 +142,27 @@ function EditProfile() {
                   <p for="inputtext5" class="form-label">
                     Nama Lengkap
                   </p>
-                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="Masukan nama lengkap" style={{ fontSize: "14px" }}></input>
+                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="Masukan nama lengkap" style={{ fontSize: "14px" }} onChange={(e) => setName(e.target.value)} />
 
                   <p for="inputtext5" class="form-label mt-3">
                     Job desk
                   </p>
-                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="Masukan job desk" style={{ fontSize: "14px" }}></input>
+                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="Masukan job desk" style={{ fontSize: "14px" }} onChange={(e) => setJobDesk(e.target.value)} />
 
                   <p for="inputtext5" class="form-label  mt-3">
                     Domisili
                   </p>
-                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="Masukan domisili" style={{ fontSize: "14px" }}></input>
+                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="Masukan domisili" style={{ fontSize: "14px" }} onChange={(e) => setDomisili(e.target.value)} />
 
                   <p for="inputtext5" class="form-label mt-3">
                     Tempat kerja
                   </p>
-                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="Masukan tempat kerja" style={{ fontSize: "14px" }}></input>
+                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="Masukan tempat kerja" style={{ fontSize: "14px" }} onChange={(e) => setTempatKerja(e.target.value)} />
 
                   <p for="exampleFormControlTextarea1" class="form-label mt-3">
                     Deskripsi singkat
                   </p>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Deskripsikan pekerjaan anda"></textarea>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Deskripsikan pekerjaan anda" onChange={(e) => setDeskripi(e.target.value)} />
                 </div>
               </div>
 
@@ -100,7 +171,7 @@ function EditProfile() {
                 <hr />
 
                 <div className="d-flex">
-                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="ex. java" style={{ fontSize: "14px" }}></input>
+                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="ex. java" style={{ fontSize: "14px" }} onChange={(e) => setSkill(e.target.value)} />
                   <button type="button" className="btn btn-warning text-light ms-3" style={{ fontSize: "14px" }}>
                     Simpan
                   </button>
@@ -115,20 +186,20 @@ function EditProfile() {
                   <p for="inputtext5" class="form-label">
                     Posisi
                   </p>
-                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="ex. Web developer" style={{ fontSize: "14px" }}></input>
+                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="ex. Web developer" style={{ fontSize: "14px" }} onChange={(e) => setPosisi(e.target.value)} />
 
                   <div class="row">
                     <div class="col">
                       <p for="inputtext5" class="form-label mt-3">
                         Nama perusahaan
                       </p>
-                      <input type="text" class="form-control" placeholder="ex. PT Harus bisa" aria-label="First name" style={{ fontSize: "14px" }} />
+                      <input type="text" class="form-control" placeholder="ex. PT Harus bisa" aria-label="First name" style={{ fontSize: "14px" }} onChange={(e) => setNamaPerusahaan(e.target.value)} />
                     </div>
                     <div class="col">
                       <p for="inputtext5" class="form-label mt-3">
                         Bulan/tahun
                       </p>
-                      <input type="text" class="form-control" placeholder="ex. Januari 2018" aria-label="Last name" style={{ fontSize: "14px" }} />
+                      <input type="text" class="form-control" placeholder="ex. Januari 2018" aria-label="Last name" style={{ fontSize: "14px" }} onChange={(e) => setLamaBekerja(e.target.value)} />
                     </div>
                     <p for="exampleFormControlTextarea1" class="form-label mt-3">
                       Example textarea
