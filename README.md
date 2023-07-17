@@ -1,38 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<img width="840" src="./screenshot/allDevice.png" border="0" alt="Landing Page" />
+<br>
 
-## Getting Started
+# Hire Job
+Website Hire Job adalah Website untuk membantu perusahaan mencari kandidat yang sesuai dengan kriteria yang di butuhkan. Aplikasi ini menggunakan database postgresQL, Express JS untuk pembuatan backend dan menggunakan library Next js, bootstrap 5, axios, dan Redux untuk pembuatannya frontend.
 
-First, run the development server:
-
-```bash
+## Instal
+Situs Resep Makanan dapat berjalan di lokal Anda, unduh repo ini dan buka menggunakan kode studio visual, dan jalankan terminal seperti di bawah ini.
+```sh
+cd food-recipe-fe-react
+npm i
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Fitures Aplikasi Pijar Food FE
+- Pencarian kandidat pekerja
+- Edit Profile pekerja
+- Daftar list pekerja
+- Halaman rekrut pekerja
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Tech
+- [Bootstrap](https://getbootstrap.com/) - Framework CSS yang di dalamnya berisi template HTML, CSS, dan JavaScript yang untuk membuat sebuah website yang responsif dengan cepat dan mudah
+- [HTML] - Hypertext Markup Language, yaitu bahasa markup standar untuk membuat dan menyusun halaman dan aplikasi web
+- [CSS] - Cascading Style Sheet yaitu digunakan untuk mengatur tampilan elemen yang tertulis dalam bahasa markup
+- [Google Chrome](https://www.google.com/chrome) - Google Chrome merupakan perangkat lunak yang memiliki fungsi untuk mencari, mengakses, dan menampilkan segala bentuk informasi
+- [JavaScript] - pemrograman yang digunakan dalam pengembangan website agar lebih dinamis dan interaktif
+- [Sweetalert2](https://sweetalert2.github.io/) - library JavaScript yang menyediakan berbagai pilihan bagi kita untuk membuat berbagai jenis pop-up alert seperti alert biasa, alert error, alert success, alert konfirmasi, dan sebagainya.
+- [Next JS](https://nextjs.org/) - framework untuk React.js yang cocok untuk membuat website dengan berbagai fitur unggulan seperti Routing Pages dan Fast Refresh.
+- [Redux] (https://redux.js.org/) - salah satu library yang biasa digunakan untuk keperluan backend.
+- [Redux Toolkit](https://redux-toolkit.js.org/) - official tool yang disediakan oleh team Redux untuk mempermudah kita jika ingin menggunakan Redux pada suatu aplikasi.
+- [Axios](https://axios-http.com/docs/intro) - situs web berita Amerika Serikat yang berbasis di Arlington County, Virginia.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Screenshots
+<table>
+ <tr>
+    <td><img width="800px" src="./screenshot/login.png" border="0" alt="Login" /></td>
+  </tr>
+  <tr>
+    <td>Login</td>
+  </tr>
+ <tr>
+  <td><img width="800px" src="./screenshot/register.png" border="0" alt="Register" /></td>
+ </tr>
+  <tr>
+    <td>Register</td>
+  </tr>
+ <tr>
+  <td><img width="800px" src="./screenshot/Home.png" border="0" alt="Home" /> </td>
+ </tr>
+  <tr>
+   <td>Home</td>
+  </tr>
+  <tr>
+    <td><img width="800px" src="./screenshot/edit.png" border="0" alt="Edit" /> </td>
+  </tr>
+   <tr>
+    <td>Edit</td>
+  </tr>
+ <tr>
+   <td><img width="800px" src="./screenshot/profile.png" border="0" alt="Profile" /> </td>
+ </tr>
+ <tr>
+     <td>Profile</td>
+  </tr>
+   <tr>
+   <td><img width="800px" src="./screenshot/hire.png" border="0" alt="Hire" /> </td>
+ </tr>
+ <tr>
+     <td>Hire</td>
+  </tr>
+</table>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Related Project
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [`Frontend Recipe Food`](https://github.com/MuhammadSonySetiawan/hirejob)
 
-## Learn More
+- [`Backend Recipe Food`](https://github.com/MuhammadSonySetiawan/hire_job_be)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [`Demo Recipe Food`](https://hirejob-ep6k.vercel.app/)
