@@ -69,8 +69,8 @@ React.useEffect(() =>{
             {/* strat content right */}
             <div className="col col-md-8">
               <div className="card p-4">
-                <h3>Hubungi Louis Tomlinson</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum erat orci, mollis nec gravida sed, ornare quis urna. Curabitur eu lacus fringilla, vestibulum risus at.</p>
+                <h3>Hubungi {user.fullname}</h3>
+                <p>Kirimkan pesan untuk rekruter yang sesuai dengan kriteria perushaan anda.</p>
 
                 <div className="text-muted" style={{ fontSize: "14px" }}>
                   <p for="inputtext5" class="form-label">
