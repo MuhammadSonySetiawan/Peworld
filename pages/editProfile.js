@@ -39,7 +39,7 @@ function EditProfile() {
     // console.log(state.dataAuth)
 
     axios
-      .put("https://hire-job.onrender.com/v1/profile", {
+      .patch("https://hire-job.onrender.com/v1/profile", {
         fullname: name ?? data.fullname,
         company: tempatKerja ?? data.company,
         job_title: jobDesk ?? data.job_title,
@@ -54,9 +54,9 @@ function EditProfile() {
           text: "Update Success ",
           icon: "success",
         });
-          // dispatch(eddAuth(response.data.data.user));
-          // console.log(response)
-          router.push("/profile");
+          dispatch(eddAuth(response.data.data.user));
+          console.log(response)
+          // router.push("/profile");
 
         axios
         .get("https://hire-job.onrender.com/v1/profile",)
@@ -64,7 +64,7 @@ function EditProfile() {
           console.log(eddAuth(response));
           // dispatch(eddAuth(response.data.data.user));
 
-          router.push("/profile");
+          // router.push("/profile");
         });
       })
       .catch((error) => {

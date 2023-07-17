@@ -8,13 +8,13 @@ function Footer() {
           <img src="/logo-white.png" alt="logo" />
 
           <p className="text-white mt-3 mb-5">
-            Lorem ipsum dolor sit amet, consectetur <br /> adipiscing elit. In euismod ipsum
-            <br /> et dui rhoncus auctor.
+            Talenta terbaik negri untuk perubahan revolusi 4.0
+            <br /> Cara mudah mencari kandidat bertalenta untuk perusahan
           </p>
 
           <hr style={{ borderBottom: "2px solid white" }} />
 
-          <p className="text-white mt-3">2020 Pewworld. All right reserved</p>
+          <p className="text-white mt-3">2023 Pewworld. All right reserved</p>
         </div>
       </footer>
     );

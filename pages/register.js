@@ -59,30 +59,30 @@ function Registrasi() {
          });
       }
      };
-
     return (
-      <main id="login_page" className="container">
+      <main id="register_page" className="container">
         <div className="row align-items-center mt-3">
           <div className="col col-md-6">
             <div style={{ position: "relative" }}>
               <div
                 className="bg-primary content-to-center"
                 style={{
-                  height: "110vh",
+                  height: "125vh",
                   width: "100%",
                   position: "absolute",
                   top: -50,
                   opacity: 0.8,
                   padding: "20px",
+                  marginTop: '50px'
                 }}
               >
                 <h1 className="text-white">Temukan developer berbakat & terbaik di berbagai bidang keahlian</h1>
               </div>
             </div>
 
-            <img src="/auth.png" width="100%" style={{ height: "95vh" }} />
+            <img src="/auth.png" width="100%" style={{ height: "125vh" }} />
           </div>
-          <div class="col-md-6 p-4 inputLogin">
+          <div class="col-md-6 p-4 inputRegister">
             <h2>Halo, Pewpeople</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
 
@@ -112,14 +112,14 @@ function Registrasi() {
                 <label for="exampleInputcompany" class="form-label">
                   Nama Perusahaan
                 </label>
-                <input type="text" class="form-control form-control-lg" id="exampleInputCompany" aria-describedby="companyHelp" placeholder="Masukan no handphone" onChange={(e) => setCompany(e.target.value)} required />
+                <input type="text" class="form-control form-control-lg" id="exampleInputCompany" aria-describedby="companyHelp" placeholder="Masukan nama perushaan" onChange={(e) => setCompany(e.target.value)} required />
               </div>
 
               <div class="mb-3">
                 <label for="exampleInputjob_title" class="form-label">
                   Jabatan
                 </label>
-                <input type="text" class="form-control form-control-lg" id="exampleInputJob_title" aria-describedby="job_titleHelp" placeholder="Masukan no handphone" onChange={(e) => setJob_title(e.target.value)} required />
+                <input type="text" class="form-control form-control-lg" id="exampleInputJob_title" aria-describedby="job_titleHelp" placeholder="Masukan jabatan" onChange={(e) => setJob_title(e.target.value)} required />
               </div>
 
               <div class="mb-3">
