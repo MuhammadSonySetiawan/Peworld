@@ -70,7 +70,7 @@ export default function Home() {
           <div className="row justify-content-end d-flex flex-wrap-reverse">
             <div className="col-md-5">
               <h2>Skill Tallent</h2>
-              <p className="mb-5">Keahlian yang di miliki talenta kami</p>
+              <p className="mb-5">Keahlian yang di miliki talenta</p>
 
               <div className="row">
                 <div className="col-md-6 d-flex flex-wrap">
