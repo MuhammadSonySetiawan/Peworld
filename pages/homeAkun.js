@@ -9,7 +9,32 @@ import Footer from '@/components/footer';
 function HomeAkun() {
 const state = useSelector((state)=>state);
 const router = useRouter();
+
 const [jobs, setJobs] = React.useState()
+const [currentPage, setCurrentPage] = React.useState(1)
+const [data, setData] = React.useState([])
+const [totalPage, setTotalPage] = React.useState(1)
+
+React.useEffect(() =>{
+  axios
+    .get('https://hire-job.onrender.com/v1/job?page=1&limit8')
+    .then(({data :{data}}) => {
+      // console.log(res),
+      setTotalPage(data?.total_page)
+      setData(data?.rows)
+    })
+},[])
+
+const hendleNextPage = (page) =>{
+  axios
+    .get(`https://hire-job.onrender.com/v1/job?page=${page}&limit8`)
+    .then(({ data: { data } }) => {
+      // console.log(res),
+      setTotalPage(data?.total_page)
+      setData(data?.rows)
+      setCurrentPage(page)
+    })
+}
 
 // React.useEffect(()=>{
 //   if(Object.keys(state.dataAuth.data) == 0){
@@ -17,7 +42,7 @@ const [jobs, setJobs] = React.useState()
 //   }else{
 //     console.log(state.dataAuth.data);
 //   }
-// })
+// },[])
 
 axios.get("https://hire-job.onrender.com/v1/job/all")
 .then((response) => {
@@ -60,7 +85,6 @@ axios.get("https://hire-job.onrender.com/v1/job/all")
             </div>
           })} */}
 
-          <div className="card p-1 mb-3 ">
             {/* {jobs.map((item, key) => {
               <div className="d-flex justify-content-between align-items-center flex-wrap mt-2" key={key}>
                 <div className="d-flex">
@@ -88,33 +112,61 @@ axios.get("https://hire-job.onrender.com/v1/job/all")
               </div>;
             })} */}
 
-            <hr />
+            
+            {data.map((item, key) => (
+          <div className="card p-1 mb-3 ">
+              <div className="d-flex justify-content-between align-items-center flex-wrap" key={key}>
+                <div className="d-flex p-3">
+                  <img src={item.photo ?? "profile-error.png"} 
+                  alt="foto profile" 
+                  className="rounded-circle img-fluid" 
+                  style={{ width: "100px", height: "100px", borderRadius: "50%", objectFit: "cover" }} 
+                  />
 
-            <div className="d-flex justify-content-between align-items-center flex-wrap">
-              <div className="d-flex">
-                <img src="/fotoProfile.webp" alt="foto profile" className="rounded-circle img-fluid" style={{ width: "150px", height: "150px", borderRadius: "50%" }}></img>
-
-                <div>
-                  <h5>Louis Tomlinson</h5>
-                  <p className="text-muted">Web developer</p>
-                  <p className="text-muted">Lorem ipsum</p>
-                  <div className="d-flex flex-wrap">
-                    {["Java", "Kotlin", "PHP", "Javascript"].map((item, key) => (
-                      <div className="row me-3 d-flex flex-wrap" key={key}>
-                        <p className="bg-warning rounded text-light">{item}</p>
-                      </div>
-                    ))}
+                  <div className="ms-4">
+                    <h5>{item.fullname}</h5>
+                    <p className="text-muted">{item.job_title ?? 'belum ada pekerjaan'}</p>
+                    <p className="text-muted">{item.company}</p>
+                    <div className="d-flex flex-wrap">
+                      {item?.skills?.map((item, key) => (
+                        <div className="row me-3 d-flex flex-wrap" key={key}>
+                          <p className="bg-warning rounded text-light">{item}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="">
-                <button type="button" className="btn btn-primary me-3 ms-3 mb-2" style={{ height: "40px" }}>
-                  Lihat Profile
-                </button>
-              </div>
-            </div>
+                <div className="">
+                  <Link href={`./job/${key}`} type="button" className="btn btn-primary me-3 ms-3 mb-2" style={{ height: "40px" }}>
+                    Lihat Profile
+                  </Link>
+                </div>
+              
+              </div>  
           </div>
+            ))}
+            
+          {/* pagination */}
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              {[...new Array(totalPage)].map((item, key) => {
+                const _page = ++key
+                  
+                    return(
+                  <li 
+                  class={`page-item ${_page === currentPage ? "active" : ""}`} 
+                    key={key}>
+                      <a class="page-link" 
+                        onClick={() => hendleNextPage(_page)} >
+                        {_page}
+                      </a></li>
+                    )
+              })}
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
         </div>
 
         {/* end content */}

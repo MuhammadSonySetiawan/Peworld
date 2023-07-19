@@ -83,7 +83,7 @@ function Login() {
 
           <div className="col-md-6 p-4 inputLogin">
             <h2>Halo, Pewpeople</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
+            
 
             {errMsg ? (
               <div className="alert alert-danger" role="alert">

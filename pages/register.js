@@ -70,10 +70,10 @@ function Registrasi() {
                   height: "125vh",
                   width: "100%",
                   position: "absolute",
-                  top: -50,
+                  top: 40,
                   opacity: 0.8,
                   padding: "20px",
-                  marginTop: '50px'
+                  marginTop: '-40px'
                 }}
               >
                 <h1 className="text-white">Temukan developer berbakat & terbaik di berbagai bidang keahlian</h1>
@@ -84,7 +84,6 @@ function Registrasi() {
           </div>
           <div class="col-md-6 p-4 inputRegister">
             <h2>Halo, Pewpeople</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
 
             <form onSubmit={handleRegistrasi}>
               <div class="mb-3">

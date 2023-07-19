@@ -54,7 +54,7 @@ export default function Home() {
             <div className="col-md-5">
               <h2 className="mb-5">Kenapa harus mencari tallent di peworld</h2>
 
-              {["Memiliki berbagai keahlian", "Kandidat berkhualias", "Proses pencarian kandidat mudah", "Kandidat yang bertalenta"].map((item, key) => (
+              {["Memiliki berbagai keahlian", "Kandidat berkualitas", "Proses pencarian kandidat mudah", "Kandidat yang bertalenta"].map((item, key) => (
                 <div className="d-flex align-items-center mb-3" key={key}>
                   <img src="/circleCheck.svg" style={{ marginRight: "20px" }} />
                   <p className="mb-0">{item}</p>
