@@ -17,7 +17,7 @@ const [totalPage, setTotalPage] = React.useState(1)
 
 React.useEffect(() =>{
   axios
-    .get('https://hire-job.onrender.com/v1/job?page=1&limit8')
+    .get('https://hire-job.onrender.com/v1/job?page=1&limit3')
     .then(({data :{data}}) => {
       // console.log(res),
       setTotalPage(data?.total_page)
@@ -27,7 +27,7 @@ React.useEffect(() =>{
 
 const hendleNextPage = (page) =>{
   axios
-    .get(`https://hire-job.onrender.com/v1/job?page=${page}&limit8`)
+    .get(`https://hire-job.onrender.com/v1/job?page=${page}&limit3`)
     .then(({ data: { data } }) => {
       // console.log(res),
       setTotalPage(data?.total_page)

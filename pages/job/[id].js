@@ -7,6 +7,7 @@ import Navbar from '@/components/navbar';
 import Footer from "@/components/footer";
 
 import { BiMap } from "react-icons/bi";
+import axios from 'axios';
 
 function Profile() {
   const [user, setUser] = React.useState("")
@@ -116,28 +117,32 @@ let company = [...new Array(2)];
 
 export async function getStaticPaths() {
     // Call an external API endpoint to get posts
-   const listId = [1, 2, 3, 4, 5];
+
+  const {data: {data}} = await axios.get("https://hire-job.onrender.com/v1/job/all");
+  console.log(data)
+  //  const listId = [1, 2, 3, 4, 5];
 
     // Get the paths we want to pre-render based on posts
-    const paths = listId.map((post) => ({
-        params: { id: post.toString() },
+    const paths = data.map((post) => ({
+        params: { id: post?.id?.toString() },
     }))
 
     // We'll pre-render only these paths at build time.
     // { fallback: false } means other routes should 404.
-    return { paths, fallback: false }
+  return { paths, fallback: "blocking" }
 }
 
 // convert this page into html
 export async function getStaticProps() {
-    const posts = await res.json()
+    // const posts = await res.json()
 
     // By returning { props: { posts } }, the Blog component
     // will receive `posts` as a prop at build time
     return {
         props: {
-            posts,
+          id: null,
         },
+      revalidate: 10,
     }
 }
 

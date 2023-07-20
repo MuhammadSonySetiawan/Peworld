@@ -32,7 +32,7 @@ export default function Home() {
                 style={{
                   marginTop: "10px",
                   height: "58%",
-                  width: "36%",
+                  width: "31%",
                   backgroundColor: "#E5E5E5",
                   transform: "rotate(20deg)",
                 }}
