@@ -61,6 +61,12 @@ npm run dev
  <tr>
      <td>Profile</td>
   </tr>
+    <tr>
+   <td><img width="800px" src="./screenshot/Topjob.png" border="0" alt="Top job" /> </td>
+ </tr>
+ <tr>
+     <td>Top Jobs</td>
+  </tr>
    <tr>
    <td><img width="800px" src="./screenshot/hire.png" border="0" alt="Hire" /> </td>
  </tr>
