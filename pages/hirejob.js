@@ -7,6 +7,9 @@ import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 
 import { BiMap } from "react-icons/bi";
+import axios from "axios";
+import Swal from "sweetalert2";
+
 
 function Hirejob() {
 const [user, setUser] = React.useState("")
@@ -20,6 +23,39 @@ React.useEffect(() =>{
     setUser(state.dataAuth.data)
   }
 })
+
+const [subject, setSubject] = React.useState();
+const [description, setDescription] = React.useState();
+
+const hendleHire =()=>{
+  const token = localStorage.getItem("token");
+  axios
+    .post(
+      "https://hire-job.onrender.com/v1/contact/1",
+      {
+        subject: subject,
+        description: description,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
+    .then((res) => {
+      Swal.fire({
+        title: "Update Success!",
+        text: res?.data?.messages,
+        icon: "success",
+      });
+      console.log(res?.data?.messages);
+       router.push("/homeAkun");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
     return (
       <div style={{ backgroundColor: "#E5E5E5" }}>
@@ -88,7 +124,8 @@ React.useEffect(() =>{
                     aria-labelledby="textHelpBlock"
                     placeholder="Projek"
                     style={{ fontSize: "14px" }}
-                  ></input>
+                    onChange={(e) => setSubject(e.target.value)}
+                  />
 
                   <p for="inputtext5" class="form-label mt-3">
                     Nama Lengkap
@@ -134,13 +171,15 @@ React.useEffect(() =>{
                     id="exampleFormControlTextarea1"
                     rows="3"
                     placeholder="Deskripsikan/jelaskan lebih detail"
-                  ></textarea>
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
 
                   <div class="d-grid gap-2 mt-3">
                     <button
                       type="button"
                       class="btn btn-warning text-light "
                       style={{ fontSize: "14px" }}
+                      onClick={hendleHire}
                     >
                       Hire
                     </button>

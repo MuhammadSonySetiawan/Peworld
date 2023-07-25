@@ -73,7 +73,9 @@ let company = [...new Array(2)];
 
                 <h2 style={{ fontSize: "18px" }}>Keterampilan</h2>
                 {user?.skills == 0 ? (
-                  "belum ada skill"
+                  <div style={{ textAlign: "center", marginTop: "10px" }}>
+                    Belum ada skill
+                  </div>
                 ) : (
                   <div className="d-inline">
                     {user?.skills?.map((item, key) => (
@@ -96,7 +98,9 @@ let company = [...new Array(2)];
                   </li>
                 </ul>
                 {user?.job_history == 0 ? (
-                  "Belum ada pengalaman kerja"
+                  <div style={{ textAlign: "center", marginTop: "10px" }}>
+                    Belum ada pengalaman kerja
+                  </div>
                 ) : (
                   <>
                     {" "}
