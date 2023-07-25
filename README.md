@@ -2,10 +2,9 @@
 <br>
 
 # Hire Job
-Website Hire Job adalah Website untuk membantu perusahaan mencari kandidat yang sesuai dengan kriteria yang di butuhkan. Aplikasi ini menggunakan database postgresQL, Express JS untuk pembuatan backend dan menggunakan library Next js, bootstrap 5, axios, dan Redux untuk pembuatannya frontend.
-
+Hire Job Website is a platform designed to assist companies in finding candidates that match their specific criteria. This application utilizes a postgresQL database, Express JS for backend development, and incorporates Next.js, Bootstrap 5, axios, and Redux libraries for frontend development.
 ## Instal
-Situs Resep Makanan dapat berjalan di lokal Anda, unduh repo ini dan buka menggunakan kode studio visual, dan jalankan terminal seperti di bawah ini.
+The Hire Job website can run on your local machine. To do this, download this repository and open it using Visual Studio Code. Then, run the terminal with the following commands below.
 ```sh
 cd food-recipe-fe-react
 npm i
@@ -13,22 +12,22 @@ npm run dev
 ```
 
 ## Fitures Aplikasi Pijar Food FE
-- Pencarian kandidat pekerja
-- Edit Profile pekerja
-- Daftar list pekerja
-- Halaman rekrut pekerja
+- Candidate job search
+- Worker profile editing
+- Worker list registration
+- Worker recruitment page
 
 ## Tech
-- [Bootstrap](https://getbootstrap.com/) - Framework CSS yang di dalamnya berisi template HTML, CSS, dan JavaScript yang untuk membuat sebuah website yang responsif dengan cepat dan mudah
-- [HTML] - Hypertext Markup Language, yaitu bahasa markup standar untuk membuat dan menyusun halaman dan aplikasi web
-- [CSS] - Cascading Style Sheet yaitu digunakan untuk mengatur tampilan elemen yang tertulis dalam bahasa markup
-- [Google Chrome](https://www.google.com/chrome) - Google Chrome merupakan perangkat lunak yang memiliki fungsi untuk mencari, mengakses, dan menampilkan segala bentuk informasi
-- [JavaScript] - pemrograman yang digunakan dalam pengembangan website agar lebih dinamis dan interaktif
-- [Sweetalert2](https://sweetalert2.github.io/) - library JavaScript yang menyediakan berbagai pilihan bagi kita untuk membuat berbagai jenis pop-up alert seperti alert biasa, alert error, alert success, alert konfirmasi, dan sebagainya.
-- [Next JS](https://nextjs.org/) - framework untuk React.js yang cocok untuk membuat website dengan berbagai fitur unggulan seperti Routing Pages dan Fast Refresh.
-- [Redux] (https://redux.js.org/) - salah satu library yang biasa digunakan untuk keperluan backend.
-- [Redux Toolkit](https://redux-toolkit.js.org/) - official tool yang disediakan oleh team Redux untuk mempermudah kita jika ingin menggunakan Redux pada suatu aplikasi.
-- [Axios](https://axios-http.com/docs/intro) - situs web berita Amerika Serikat yang berbasis di Arlington County, Virginia.
+- [Bootstrap](https://getbootstrap.com/) - The CSS framework that contains HTML, CSS, and JavaScript templates for creating a fast and easy-to-build responsive website.
+- [HTML] - Hypertext Markup Language, commonly known as HTML, is the standard markup language used to create and structure web pages and web applications.
+- [CSS] - Cascading Style Sheet, commonly known as CSS, is used to control the presentation and layout of elements written in a markup language.
+- [Google Chrome](https://www.google.com/chrome) - Google Chrome is a software that serves the function of searching, accessing, and displaying all kinds of information.
+- [JavaScript] - The programming used in website development to make it more dynamic and interactive.
+- [Sweetalert2](https://sweetalert2.github.io/) - JavaScript library that provides various options for creating different types of pop-up alerts, such as regular alerts, error alerts, success alerts, confirmation alerts, and more.
+- [Next JS](https://nextjs.org/) - A framework for React.js that is suitable for building websites with various outstanding features such as Routing Pages and Fast Refresh.
+- [Redux] (https://redux.js.org/) - One of the libraries commonly used for backend purposes.
+- [Redux Toolkit](https://redux-toolkit.js.org/) - The official tool provided by the Redux team to facilitate the use of Redux in an application.
+- [Axios](https://axios-http.com/docs/intro) - A United States news website based in Arlington County, Virginia.
 
 ## Screenshots
 <table>
