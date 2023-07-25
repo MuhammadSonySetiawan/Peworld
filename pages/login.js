@@ -21,7 +21,7 @@ function Login() {
         // const storedToken = localStorage.getItem("auth")
         // console.log(storedToken)
 
-        if (Object.keys(state.dataAuth.data).length != 0) {
+        if (Object?.keys(state?.dataAuth?.data).length != 0) {
           router.push("profile");
         }
         
@@ -94,20 +94,20 @@ function Login() {
             <form onSubmit={handleLogin}>
               <div className="mb-3">
                 <label for="exampleInputEmail1" className="form-label">
-                  Email address
+                  Email 
                 </label>
                 <input type="email" className="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan alamat email" onChange={(e) => setEmail(e.target.value)} required />
               </div>
               <div className="mb-5">
                 <label for="exampleInputPassword1" className="form-label">
-                  Password
+                  Kata sandi
                 </label>
                 <input type="password" className="form-control form-control-lg" id="exampleInputPassword1" placeholder="Masukan kata sandi" onChange={(e) => setPassword(e.target.value)} required />
               </div>
 
               <div className="d-grid">
                 <button type="submit" className="btn btn-primary btn-lg">
-                  Submit
+                  Login
                 </button>
               </div>
 

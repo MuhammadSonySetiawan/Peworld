@@ -45,7 +45,9 @@ React.useEffect(() =>{
                   />
                 </div>
 
-                <h1 style={{ fontSize: "30px", marginTop: "30px" }}>{user.fullname}</h1>
+                <h1 style={{ fontSize: "30px", marginTop: "30px" }}>
+                  {user.fullname}
+                </h1>
                 <p>{user.job_title}</p>
                 <p classname="text-muted">
                   <BiMap /> {user.domicile}
@@ -53,11 +55,11 @@ React.useEffect(() =>{
 
                 <p className="text-black-50">{user.description}</p>
 
-                <h2 style={{ fontSize: "25px" }}>Skills</h2>
+                <h2 style={{ fontSize: "18px" }}>Keterampilan</h2>
 
                 <div className="d-inline">
                   {user?.skills?.map((item, key) => (
-                    <span key={key} class="badge bg-warning m-1 p-2 ">
+                    <span key={key} class="badge bg-warning me-1 p-2 ">
                       {item}
                     </span>
                   ))}
@@ -70,36 +72,76 @@ React.useEffect(() =>{
             <div className="col col-md-8">
               <div className="card p-4">
                 <h3>Hubungi {user.fullname}</h3>
-                <p>Kirimkan pesan untuk rekruter yang sesuai dengan kriteria perushaan anda.</p>
+                <p>
+                  Kirimkan pesan untuk rekruter yang sesuai dengan kriteria
+                  perushaan anda.
+                </p>
 
                 <div className="text-muted" style={{ fontSize: "14px" }}>
                   <p for="inputtext5" class="form-label">
                     Tujuan tentang pesan ini
                   </p>
-                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="Projek" style={{ fontSize: "14px" }}></input>
+                  <input
+                    type="text"
+                    id="inputtext5"
+                    class="form-control"
+                    aria-labelledby="textHelpBlock"
+                    placeholder="Projek"
+                    style={{ fontSize: "14px" }}
+                  ></input>
 
                   <p for="inputtext5" class="form-label mt-3">
                     Nama Lengkap
                   </p>
-                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="Masukan nama lengkap" style={{ fontSize: "14px" }}></input>
+                  <input
+                    type="text"
+                    id="inputtext5"
+                    class="form-control"
+                    aria-labelledby="textHelpBlock"
+                    placeholder="Masukan nama lengkap"
+                    style={{ fontSize: "14px" }}
+                  ></input>
 
                   <p for="inputtext5" class="form-label  mt-3">
                     Email
                   </p>
-                  <input type="Email" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="Masukan email" style={{ fontSize: "14px" }}></input>
+                  <input
+                    type="Email"
+                    id="inputtext5"
+                    class="form-control"
+                    aria-labelledby="textHelpBlock"
+                    placeholder="Masukan email"
+                    style={{ fontSize: "14px" }}
+                  ></input>
 
                   <p for="inputtext5" class="form-label mt-3">
                     No Handphone
                   </p>
-                  <input type="text" id="inputtext5" class="form-control" aria-labelledby="textHelpBlock" placeholder="masukan nomer handphone" style={{ fontSize: "14px" }}></input>
+                  <input
+                    type="text"
+                    id="inputtext5"
+                    class="form-control"
+                    aria-labelledby="textHelpBlock"
+                    placeholder="masukan nomer handphone"
+                    style={{ fontSize: "14px" }}
+                  ></input>
 
                   <p for="exampleFormControlTextarea1" class="form-label mt-3">
                     Deskripsi
                   </p>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Deskripsikan/jelaskan lebih detail"></textarea>
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                    placeholder="Deskripsikan/jelaskan lebih detail"
+                  ></textarea>
 
                   <div class="d-grid gap-2 mt-3">
-                    <button type="button" class="btn btn-warning text-light " style={{ fontSize: "14px" }}>
+                    <button
+                      type="button"
+                      class="btn btn-warning text-light "
+                      style={{ fontSize: "14px" }}
+                    >
                       Hire
                     </button>
                   </div>

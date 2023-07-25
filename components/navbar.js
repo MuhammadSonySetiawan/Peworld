@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { AiOutlineMail } from "react-icons/ai";
 import { AiOutlineBell } from "react-icons/ai";
 import { useRouter } from "next/router";
-
+ 
 function Navbar() {
   const [auth, setAuth] = React.useState("")
   const [dataUser, setDataUser] = React.useState("")
@@ -21,8 +21,8 @@ function Navbar() {
   }
 
   React.useEffect(() => {
-    const auth = state.dataAuth.data;
-    const keys = Object.keys(auth).length;
+    const auth = state?.dataAuth?.data;
+    const keys = Object?.keys(auth)?.length;
     console.log(keys)
     setAuth(keys);
     setDataUser(auth) 

@@ -5,29 +5,22 @@ import { useRouter } from 'next/router';
 import axios from "axios"
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
+import _debounce from 'lodash/debounce';
+import {useCallback} from 'react';
 
-function HomeAkun() {
+function HomeAkun(props) {
 const state = useSelector((state)=>state);
 const router = useRouter();
 
 const [jobs, setJobs] = React.useState()
 const [currentPage, setCurrentPage] = React.useState(1)
-const [data, setData] = React.useState([])
-const [totalPage, setTotalPage] = React.useState(1)
+const [totalPage, setTotalPage] = React.useState(props?.request?.data?.total_page)
+const [data, setData] = React.useState(props?.request?.data?.rows)
 
-React.useEffect(() =>{
-  axios
-    .get('https://hire-job.onrender.com/v1/job?page=1&limit3')
-    .then(({data :{data}}) => {
-      // console.log(res),
-      setTotalPage(data?.total_page)
-      setData(data?.rows)
-    })
-},[])
 
 const hendleNextPage = (page) =>{
   axios
-    .get(`https://hire-job.onrender.com/v1/job?page=${page}&limit3`)
+    .get(`https://hire-job.onrender.com/v1/job?page=${page}&limit8`)
     .then(({ data: { data } }) => {
       // console.log(res),
       setTotalPage(data?.total_page)
@@ -36,23 +29,23 @@ const hendleNextPage = (page) =>{
     })
 }
 
-// React.useEffect(()=>{
-//   if(Object.keys(state.dataAuth.data) == 0){
-//     router.push("/login")
-//   }else{
-//     console.log(state.dataAuth.data);
-//   }
-// },[])
 
-axios.get("https://hire-job.onrender.com/v1/job/all")
-.then((response) => {
-  console.log(response?.data?.data)
-  // setJobs(response?.data?.data);
+const hendleSearch = (keyword) =>{
+  if(keyword) {
+    axios
+    .get(`https://hire-job.onrender.com/v1/job/filter?keyword=${keyword}`)
+    .then(({ data: { data } }) => {
+      // console.log(res),
+      setTotalPage(0)
+      setData(data ?? [])
+      setCurrentPage(1)
+    })
+  }else{
+    hendleNextPage(1)
+  }
+}
 
-})
-.catch((error) => {
-  console.log(error)
-})
+const debounceFn = useCallback(_debounce(hendleSearch, 1000), []);
 
     return (
       <div style={{ backgroundColor: "#E5E5E5" }}>
@@ -69,7 +62,20 @@ axios.get("https://hire-job.onrender.com/v1/job/all")
         <div className="container mt-3">
           <div className="card p-1 mb-3">
             <div class="d-flex">
-              <input type="search" class="form-control border-light" placeholder="Search" aria-label="Recipient's username with two button addons" />
+              <input 
+                type="search" 
+                class="form-control border-light" placeholder="Search" 
+                aria-label="Recipient's username with two button addons" 
+                onChange={(e)=> {
+                  // hendleSearch(e.target.value);  
+                  debounceFn(e.target.value);
+                  }}
+                onKeyDown={(e) =>{
+                  if(e.key === 'Enter'){
+                    hendleSearch(e.target.value)
+                  }
+                }}
+              />
               <label className="text-muted text-center mt-1 ms-2 me-2 ps-2" style={{ borderLeft: "1px solid grey" }}>
                 Kategori
               </label>
@@ -79,42 +85,16 @@ axios.get("https://hire-job.onrender.com/v1/job/all")
             </div>
           </div>
 
-          {/* {jobs?.map((item, key) =>{
-            <div key={key}>
-              <h2>{item.fullname}</h2>
-            </div>
-          })} */}
-
-            {/* {jobs.map((item, key) => {
-              <div className="d-flex justify-content-between align-items-center flex-wrap mt-2" key={key}>
-                <div className="d-flex">
-                  <img src={item.photo} alt="foto profile" className="rounded-circle img-fluid" style={{ width: "150px", height: "150px", borderRadius: "50%" }} />
-
-                  <div>
-                    <h5>{item.fullname}</h5>
-                    <p className="text-muted">{item.job_title}</p>
-                    <p className="text-muted">{item.company}</p>
-                    <div className="d-flex flex-wrap">
-                      {item.skills.map((itemSkils, keySkills) => (
-                        <div className="row me-3 d-flex flex-wrap" key={keySkills}>
-                          <p className="bg-warning rounded text-light">{itemSkils}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <Link href="" className="text-decoration-none">
-                  <button type="button" class="btn btn-primary me-3 ms-3 mb-2" style={{ height: "40px" }}>
-                    Lihat Profile
-                  </button>
-                </Link>
-              </div>;
-            })} */}
-
-            
+          {data.length === 0 ?(
+          <>
+          <div className='d-flex justify-content-center mt-4'>
+             <img src='/empty.svg' style={{width:'300px'}}/> 
+          </div>
+            <h3 className='text-center mt-3'>Data not found</h3>
+          </>)
+           : null}
             {data.map((item, key) => (
-          <div className="card p-1 mb-3 ">
+          <div className="card p-1 mb-3 " key={key}>
               <div className="d-flex justify-content-between align-items-center flex-wrap" key={key}>
                 <div className="d-flex p-3">
                   <img src={item.photo ?? "profile-error.png"} 
@@ -124,11 +104,11 @@ axios.get("https://hire-job.onrender.com/v1/job/all")
                   />
 
                   <div className="ms-4">
-                    <h5>{item.fullname}</h5>
-                    <p className="text-muted">{item.job_title ?? 'belum ada pekerjaan'}</p>
-                    <p className="text-muted">{item.company}</p>
+                    <h5>{item.fullname ?? "Unknown" }</h5>
+                    <p className="text-muted">{item.job_title ?? "Unknown"}</p>
+                    <p className="text-muted">{item.company ?? "Unknown"}</p>
                     <div className="d-flex flex-wrap">
-                      {item?.skills?.map((item, key) => (
+                      {item?.skills?.slice(0,5)?.map((item, key) => (
                         <div className="row me-3 d-flex flex-wrap" key={key}>
                           <p className="bg-warning rounded text-light">{item}</p>
                         </div>
@@ -147,10 +127,14 @@ axios.get("https://hire-job.onrender.com/v1/job/all")
           </div>
             ))}
             
-          {/* pagination */}
-          <nav aria-label="Page navigation example">
+          {totalPage > 0 ? 
+               (<nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" onClick={()=>{
+                if(currentPage > 1){
+                  hendleNextPage(currentPage - 1)
+                }
+              }}>Previous</a></li>
               {[...new Array(totalPage)].map((item, key) => {
                 const _page = ++key
                   
@@ -164,9 +148,16 @@ axios.get("https://hire-job.onrender.com/v1/job/all")
                       </a></li>
                     )
               })}
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              <li class="page-item">
+                <a class="page-link" onClick={()=>{
+                if(currentPage > 1){
+                  hendleNextPage(currentPage + 1)
+                }
+                }}>Next</a></li>
             </ul>
-          </nav>
+          </nav>) : null}
+          {/* pagination */}
+     
         </div>
 
         {/* end content */}
@@ -176,6 +167,14 @@ axios.get("https://hire-job.onrender.com/v1/job/all")
         {/* end footer */}
       </div>
     );
+}
+
+export async function getServerSideProps() {
+const request = await axios
+    .get('https://hire-job.onrender.com/v1/job?page=1&limit8')
+    .then((res)=> res?.data)
+     // Pass data to the page via props
+  return { props: { request } }
 }
 
 export default HomeAkun

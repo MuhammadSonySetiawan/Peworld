@@ -14,7 +14,7 @@ function Profile() {
   const state = useSelector((state) => state);
 
  React.useEffect(() =>{
-  if(Object.keys(state.dataAuth.data).length == 0){
+  if(Object.keys(state.dataAuth.data) == 0){
     router.push("/login")
   }else{
     setUser(state.dataAuth.data);
@@ -28,7 +28,10 @@ let company = [...new Array(2)];
         {/* Strat navbar */}
         <Navbar />
         <div style={{ height: "50%", width: "100%" }}>
-          <div className="bg-primary position-absolute" style={{ height: "250px", width: "100%" }}></div>
+          <div
+            className="bg-primary position-absolute"
+            style={{ height: "250px", width: "100%" }}
+          ></div>
         </div>
         {/* end navbar */}
 
@@ -38,7 +41,7 @@ let company = [...new Array(2)];
               <div className="card p-4">
                 <div className="d-flex justify-content-center">
                   <img
-                    src={user.photo ?? '../public/auth.png'}
+                    src={user.photo ?? "../public/auth.png"}
                     alt="profile"
                     style={{
                       height: "150px",
@@ -48,28 +51,38 @@ let company = [...new Array(2)];
                   />
                 </div>
 
-                <h1 style={{ fontSize: "30px", marginTop: "30px" }}>{user.fullname}</h1>
+                <h1 style={{ fontSize: "30px", marginTop: "30px" }}>
+                  {user.fullname}
+                </h1>
                 <p>{user.job_title}</p>
                 <p classname="text-muted">
-                  <BiMap /> {user?.domicile == 0 ? 'tidak ada' : user?.domicile}
+                  <BiMap /> {user?.domicile == 0 ? "tidak ada" : user?.domicile}
                 </p>
                 <p>{user?.company}</p>
 
                 <p className="text-black-50">{user?.description}</p>
 
-                <Link href="/hirejob" class="d-grid gap-2 mt-3 text-decoration-none">
-                  <button className="btn btn-primary btn-lg mb-3">Hire</button>
+                <Link
+                  href="/editProfile"
+                  class="d-grid gap-2 mt-3 text-decoration-none"
+                >
+                  <button className="btn btn-primary btn-lg mb-3">
+                    Edit Profile
+                  </button>
                 </Link>
 
-                <h2 style={{ fontSize: "25px" }}>Skills</h2>
-                {user?.skills == 0 ? ('belum ada skill') : (<div className="d-inline">
-                  {user?.skills?.map((item, key) => (
-                    <span key={key} class="badge bg-warning m-1 p-2 ">
-                      {item}
-                    </span>
-                  ))}
-                </div>)} 
-              
+                <h2 style={{ fontSize: "18px" }}>Keterampilan</h2>
+                {user?.skills == 0 ? (
+                  "belum ada skill"
+                ) : (
+                  <div className="d-inline">
+                    {user?.skills?.map((item, key) => (
+                      <span key={key} class="badge bg-warning me-1 p-2 ">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -82,26 +95,41 @@ let company = [...new Array(2)];
                     </a>
                   </li>
                 </ul>
-                {user?.job_history == 0 ? 'Belum ada pengalaman kerja' : (<> {user?.job_history?.map((item, key) => (
-                  <div className="row mt-4 descProfile d-flex flex-wrap" key={key}>
-                    <div className="col col-md-2">
-                      <img src={item.logo} style={{ width: "100%" }} />
-                    </div>
+                {user?.job_history == 0 ? (
+                  "Belum ada pengalaman kerja"
+                ) : (
+                  <>
+                    {" "}
+                    {user?.job_history?.map((item, key) => (
+                      <div
+                        className="row mt-4 descProfile d-flex flex-wrap"
+                        key={key}
+                      >
+                        <div className="col col-md-2">
+                          <img src={item.logo} style={{ width: "100%" }} />
+                        </div>
 
-                    <div className="col col-md-10">
-                      <h5 className="mb-0">{item.position ?? 'Pelum ada posisi'}</h5>
-                      <p className="mb-0">{item.company ?? 'Perusahaan belum ada'}</p>
-                      <div className="d-flex align-items-center">
-                        <p style={{ color: "#9EA0A5" }}>{item.date}</p>
-                        <p style={{ marginLeft: "30px", color: "#9EA0A5" }}>6 months</p>
+                        <div className="col col-md-10">
+                          <h5 className="mb-0">
+                            {item.position ?? "Pelum ada posisi"}
+                          </h5>
+                          <p className="mb-0">
+                            {item.company ?? "Perusahaan belum ada"}
+                          </p>
+                          <div className="d-flex align-items-center">
+                            <p style={{ color: "#9EA0A5" }}>{item.date}</p>
+                            <p style={{ marginLeft: "30px", color: "#9EA0A5" }}>
+                              6 months
+                            </p>
+                          </div>
+                          <p>{item.description}</p>
+
+                          {key === company.length - 1 ? null : <hr />}
+                        </div>
                       </div>
-                      <p>{item.description}</p>
-
-                      {key === company.length - 1 ? null : <hr />}
-                    </div>
-                  </div>
-                ))}</> )}
-               
+                    ))}
+                  </>
+                )}
               </div>
             </div>
           </div>
