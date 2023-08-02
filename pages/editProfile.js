@@ -15,34 +15,52 @@ function EditProfile() {
   const dispatch = useDispatch();
   const router = useRouter();
   const state = useSelector((state) => state);
+
   const [user, setUser] = React.useState("");
-
-  React.useEffect(() => {
-    if (
-      Object.keys(state.dataAuth.data) ==
-      // &&
-      // !localStorage.getItem("token")
-      0
-    ) {
-      router.push("/login");
-    } else {
-      setUser(state.dataAuth.data);
-      // const token = localStorage.getItem("token");
-      // console.log(token);
-      // console.log(state?.dataAuth.data)
-    }
-  });
-
-  //Start Update Profile
   const [fullname, setFullname] = React.useState(user?.fullname);
   const [company, setCompany] = React.useState(user?.company);
   const [job_title, setJob_title] = React.useState(user?.job_title);
   const [phone, setPhone] = React.useState(user?.phone);
   const [description, setDescription] = React.useState(user?.description);
   const [domicile, setDomicile] = React.useState(user?.domicile);
+  const [photo, setPhoto] = React.useState(user?.photo);
+  const [skills, setSkills] = React.useState("");
+  const [posisi, setPosisi] = React.useState("");
+  const [namaPerusahaan, setNamaPerusahaan] = React.useState("");
+  const [lamaBekerja, setLamaBekerja] = React.useState("");
+  const [descrip, setDescrip] = React.useState("");
+  const [logo, setlogo] = React.useState("");
 
-  const hendleUpdate = () => {
-    // console.log(state.dataAuth);
+  React.useEffect(() => {
+    if (Object.keys(state.dataAuth.data) == 0) {
+      router.push("/login");
+    } else {
+      setUser(state.dataAuth.data);
+      console.log(state.dataAuth);
+    }
+  });
+
+  //Refress Update Profile
+  const handleRefresh = () => {
+    const token = localStorage.getItem("token");
+    axios
+      .get("https://hire-job.onrender.com/v1/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        dispatch(eddAuth(response.data.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  //Start Update Profile
+  const handleUpdate = () => {
     const formData = new FormData();
     const token = localStorage.getItem("token");
     axios
@@ -70,12 +88,9 @@ function EditProfile() {
           icon: "success",
         });
         console.log(response);
-        // setUser(response?.data?.data);
-        // dispatch(eddAuth(response?.data?.data));
-        // });
-         router.push("/profile");
+        router.push("/profile");
 
-        // window.location.href = "/profile";
+        handleRefresh();
       })
       .catch((error) => {
         console.log(error);
@@ -84,40 +99,43 @@ function EditProfile() {
   //End Update Profile
 
   //Start Update Photo Profile
-  const [photo, setPhoto] = React.useState(user?.photo);
-   const hendlePhoto = () => {
-        const token = localStorage.getItem("token");
+  const handlePhoto = (e) => {
+    const token = localStorage.getItem("token");
     axios
       .patch(
         "https://hire-job.onrender.com/v1/profile/picture",
         {
-          photo: photo ?? user.photo,
+          photo: photo,
         },
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       )
       .then((res) => {
-        console.log(res);
+        Swal.fire({
+          title: "Update Photo Success!",
+          text: res?.data?.messages,
+          icon: "success",
+        });
+        handleRefresh();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err?.data?.messages);
       });
-   };
+  };
   //End Update Photo Profile
 
-
-  const [skills, setSkills] = React.useState([]);
-
-  const hendleSkills = () => {
+  // start add skill
+  const handleSkills = () => {
     const token = localStorage.getItem("token");
     axios
       .post(
         "https://hire-job.onrender.com/v1/skills",
         {
-          skills: skills,
+          skills: [skills],
         },
         {
           headers: {
@@ -126,86 +144,106 @@ function EditProfile() {
         }
       )
       .then((res) => {
-        console.log(res);
+        Swal.fire({
+          title: "Successfully added!",
+          text: res?.data?.messages,
+          icon: "success",
+        });
+        handleRefresh();
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  // end add skill
 
-  const [idDelete, setIdDelete] = React.useState();
-
-  console.log(idDelete);
-  const hendleSkillsDelete = () => {
-    console.log(state);
-    const id = user?.skills;
+  // start delete skill
+  const handleSkillsDelete = (e) => {
+    const idSkill = e?.target?.id;
     const token = localStorage.getItem("token");
     axios
-      .delete(
-        `https://hire-job.onrender.com/v1/skills/${id}`,
-        {
-          skills: skills,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const [posisi, setPosisi] = React.useState("");
-  const [namaPerusahaan, setNamaPerusahaan] = React.useState("");
-  const [lamaBekerja, setLamaBekerja] = React.useState("");
-  const [dscrip, setDescrip] = React.useState("");
-  const [logo, setlogo] = React.useState("");
-
-  const hendleCompany = () => {
-    const token = localStorage.getItem("token");
-    axios
-      .post(
-        "https://hire-job.onrender.com/v1/job",
-        {
-          logo: logo,
-          position: posisi,
-          company: namaPerusahaan,
-          date: lamaBekerja,
-          description: dscrip,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const hendleCompanyDelete = () => {
-    const idCompany = axios
-      .delete(`https://hire-job.onrender.com/v1/job/${idCompany}`, {
+      .delete(`https://hire-job.onrender.com/v1/skills/${idSkill}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
-        console.log(res);
+        Swal.fire({
+          title: "Delete Success!",
+          text: res?.data?.messages,
+          icon: "success",
+        });
+        handleRefresh();
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  // end delete skill
+
+  // start add company
+  const handleCompany = () => {
+    const token = localStorage.getItem("token");
+    axios
+      .post(
+        "https://hire-job.onrender.com/v1/job",
+        {
+          photo: logo,
+          position: posisi,
+          company: namaPerusahaan,
+          date: lamaBekerja,
+          description: descrip,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((res) => {
+        Swal.fire({
+          title: "Successfully added!",
+          text: res?.data?.messages,
+          icon: "success",
+        });
+        handleRefresh();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // end add company
+
+  // start delete company
+  const handleCompanyDelete = (e) => {
+    const token = localStorage.getItem("token");
+    const idDelleteCompany = e?.target?.id;
+    axios
+      .delete(
+        `https://hire-job.onrender.com/v1/job/${idDelleteCompany}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        {
+          cache: "no-store",
+        }
+      )
+      .then((res) => {
+        Swal.fire({
+          title: "Delete Success!",
+          text: res?.data?.messages,
+          icon: "success",
+        });
+        handleRefresh();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // end delete company
 
   return (
     <div id="edit-profile_page" style={{ backgroundColor: "#E5E5E5" }}>
@@ -243,13 +281,14 @@ function EditProfile() {
                     className="form-control h-20"
                     type="file"
                     id="formFileDisabled"
-                    onChange={(e) => setPhoto(e.target.value)}
+                    onChange={(e) => setPhoto(e.target.files[0])}
                   />
                 </form>
                 <button
                   type="button"
                   class="btn btn-light"
-                  onClick={hendlePhoto}
+                  onClick={handlePhoto}
+                  {...user?.photo}
                 >
                   Edit
                 </button>
@@ -268,7 +307,7 @@ function EditProfile() {
                 <button
                   className="btn btn-primary btn-lg mt-4 mb-2"
                   style={{ width: "100%" }}
-                  onClick={hendleUpdate}
+                  onClick={handleUpdate}
                 >
                   Simpan
                 </button>
@@ -342,7 +381,7 @@ function EditProfile() {
                   aria-labelledby="textHelpBlock"
                   placeholder="Masukan alamat"
                   style={{ fontSize: "14px" }}
-                  vdefaultValue={user?.domicile}
+                  defaultValue={user?.domicile}
                   onChange={(e) => setDomicile(e.target.value)}
                 />
 
@@ -393,7 +432,7 @@ function EditProfile() {
                   type="button"
                   className="btn btn-warning text-light ms-3"
                   style={{ fontSize: "14px" }}
-                  onClick={hendleSkills}
+                  onClick={handleSkills}
                 >
                   Simpan
                 </button>
@@ -407,31 +446,19 @@ function EditProfile() {
                   {user?.skills?.map((item, key) => (
                     <span
                       key={key}
-                      class="badge bg-warning mt-3 ms-1 p-2 text-center "
+                      className="badge bg-warning mt-3 ms-1 text-center "
                     >
                       {item}
                       <button
                         type="button"
-                        className="btn-close ms-2"
-                        aria-label="Close"
-                        onClick={() => {
-                          hendleSkillsDelete, (key = { setIdDelete });
-                        }}
-                      />
-                      {/* <button
-                        type="button"
-                        class="btn btn-light ms-3 text-md-start"
-                        style={{
-                          borderRadius: "10px",
-                          width: "20px",
-                          height: "20px",
-                          fontSize: "15px",
-                          textAlign: "left",
-                          fontWeight: "bold",
-                        }}
+                        className="btn btn-link text-decoration-none text-light"
+                        // aria-label="Close"
+                        id={key}
+                        onClick={handleSkillsDelete}
+                        {...item}
                       >
-                        <label style={{textAlign:"center"}}>X</label>
-                      </button> */}
+                        X
+                      </button>
                     </span>
                   ))}
                 </div>
@@ -451,7 +478,7 @@ function EditProfile() {
                     class="form-control"
                     type="file"
                     id="formFile"
-                    onChange={(e) => setlogo(e.target.value)}
+                    onChange={(e) => setlogo(e.target.files[0])}
                   />
                 </div>
 
@@ -510,7 +537,7 @@ function EditProfile() {
                       type="button"
                       class="btn btn-outline-warning"
                       style={{ fontSize: "14px" }}
-                      onClick={hendleCompany}
+                      onClick={handleCompany}
                     >
                       Tambah pengalaman kerja
                     </button>
@@ -556,7 +583,8 @@ function EditProfile() {
                       <button
                         type="button"
                         class="btn btn-primary"
-                        onClick={hendleCompanyDelete}
+                        onClick={handleCompanyDelete}
+                        {...item}
                       >
                         Hapus
                       </button>
@@ -565,92 +593,6 @@ function EditProfile() {
                 </>
               )}
             </form>
-
-            {/* <div className="card p-4">
-              <h5>Portofolio</h5>
-              <hr />
-              <div style={{ fontSize: "14px" }}>
-                <p for="exampleFormControlTextarea1" class="form-label">
-                  Nama aplikasi
-                </p>
-                <input
-                  type="text"
-                  id="inputtext5"
-                  class="form-control"
-                  aria-labelledby="textHelpBlock"
-                  placeholder="Masukan nama aplikasi"
-                  style={{ fontSize: "14px" }}
-                ></input>
-
-                <p for="exampleFormControlTextarea1" class="form-label mt-3">
-                  Link repositoty
-                </p>
-                <input
-                  type="text"
-                  id="inputtext5"
-                  class="form-control"
-                  aria-labelledby="textHelpBlock"
-                  placeholder="Masukan link repositoty"
-                  style={{ fontSize: "14px" }}
-                ></input>
-
-                <p for="exampleFormControlTextarea1" class="form-label mt-3">
-                  Link repositoty
-                </p>
-                <div className="d-flex ">
-                  <div class="form-check ">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                      style={{ fontSize: "14px" }}
-                    />
-                    <p class="form-check-label" for="flexRadioDefault1">
-                      Aplikasi mobile
-                    </p>
-                  </div>
-                  <div class="form-check ms-3">
-                    <p
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault2"
-                      checked
-                      style={{ fontSize: "14px" }}
-                    />
-                    <label class="form-check-label" for="flexRadioDefault2">
-                      Aplikasi web
-                    </label>
-                  </div>
-                </div>
-
-                <label
-                  for="exampleFormControlTextarea1"
-                  class="form-label mt-3"
-                >
-                  Upload gambar
-                </label>
-                <div
-                  style={{
-                    width: "100%",
-                    height: "50px",
-                    border: "2px dashed #E5E5E5",
-                  }}
-                ></div>
-
-                <hr />
-                <div class="d-grid gap-2">
-                  <button
-                    type="button"
-                    class="btn btn-outline-warning"
-                    style={{ fontSize: "14px" }}
-                  >
-                    Tambah portofolio
-                  </button>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>

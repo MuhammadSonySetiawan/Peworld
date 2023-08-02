@@ -20,7 +20,7 @@ export default function Home() {
             <div className="col-md-5">
               <h1 className="d-block mb-3">Talenta terbaik negri untuk perubahan revolusi 4.0</h1>
               <p className="d-block mb-5">Cara mudah mencari kandidat bertalenta untuk perusahan</p>
-              <Link href="/register">
+              <Link href="/homeAkun">
                 <button className="btn btn-primary btn-lg">Mulai Dari Sekarang</button>
               </Link>
               {/* <button className="btn btn-primary btn-lg" onClick={}>conter :</button> */}
@@ -52,7 +52,7 @@ export default function Home() {
               <img src="/home_2.jpg" alt="Home Picture" className="img-fluid mb-2 rounded" />
             </div>
             <div className="col-md-5">
-              <h2 className="mb-5">Kenapa harus mencari tallent di peworld</h2>
+              <h2 className="mb-5">Kenapa harus mencari tallent di Peworld</h2>
 
               {["Memiliki berbagai keahlian", "Kandidat berkualitas", "Proses pencarian kandidat mudah", "Kandidat yang bertalenta"].map((item, key) => (
                 <div className="d-flex align-items-center mb-3" key={key}>

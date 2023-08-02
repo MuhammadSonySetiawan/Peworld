@@ -61,7 +61,7 @@ function Registrasi() {
      };
     return (
       <main id="register_page" className="container">
-        <div className="row align-items-center mt-3">
+        <div className="row align-items-center mt-3 mb-3">
           <div className="col col-md-6">
             <div style={{ position: "relative" }}>
               <div

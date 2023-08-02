@@ -18,3 +18,4 @@ const dataAuth = createSlice({
 export const { eddAuth } = dataAuth.actions
 
 export default dataAuth.reducer
+ 

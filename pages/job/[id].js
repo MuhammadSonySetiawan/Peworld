@@ -14,10 +14,12 @@ function Profile(props) {
   const router = useRouter();
   const state = useSelector((state) => state);
   const [hire, setHire] = React.useState()
-
+// console.log(state)
+// console.log(location)
   console.log(props)
-
+// console.log(router)
   React.useEffect(() =>{
+    
     if(Object.keys(state?.dataAuth?.data).length == 0){
       router.push("/login")
     }else{
@@ -27,10 +29,21 @@ function Profile(props) {
       axios
       .get("https://hire-job.onrender.com/v1/job/")
       .then((response) => 
-      console.log(response?.data?.data))
+      console.log()
+      )
+  //     const id = router?.query?.id
+  //     axios
+  //       .get("https://hire-job.onrender.com/v1/job/all")
+  //       .then((response) => console.log(response?.data?.data));
   }
-  console.log(parseInt(router?.query))
- })
+  // console.log(parseInt(router?.query))
+ },[])
+
+ const handleHire =()=>{
+  router?.query?.id;
+  router.replace('../hirejob.js')
+ }
+// console.log(state);
 
 let company = [...new Array(2)];
     return (
@@ -58,7 +71,7 @@ let company = [...new Array(2)];
                       width: "150px",
                       borderRadius: "50%",
                     }}
-                  />
+                  /> 
                 </div>
 
                 <h1 style={{ fontSize: "30px", marginTop: "30px" }}>
@@ -73,10 +86,13 @@ let company = [...new Array(2)];
                 <p className="text-black-50">{user?.description}</p>
 
                 <Link
+                  {...router?.query?.id}
                   href="/hirejob"
                   class="d-grid gap-2 mt-3 text-decoration-none"
                 >
-                  <button className="btn btn-primary btn-lg mb-3">Hire</button>
+                  <button className="btn btn-primary btn-lg mb-3">
+                    Rekrut
+                  </button>
                 </Link>
 
                 <h2 style={{ fontSize: "18px" }}>Keterampilan</h2>
@@ -85,7 +101,7 @@ let company = [...new Array(2)];
                 ) : (
                   <div className="d-inline">
                     {user?.skills?.map((item, key) => (
-                      <span key={key} class="badge bg-warning me-1 p-2 ">
+                      <span key={key} class="badge bg-warning mb-2 me-1 p-2 ">
                         {item}
                       </span>
                     ))}
@@ -153,13 +169,16 @@ let company = [...new Array(2)];
 export async function getStaticPaths() {
     // Call an external API endpoint to get posts
 
-  const {data: {data}} = await axios.get("https://hire-job.onrender.com/v1/job/all");
-  console.log(data)
+  const {
+    data: {data}
+  } = await axios.get("https://hire-job.onrender.com/v1/job/all");
+  
   //  const listId = [1, 2, 3, 4, 5];
 
     // Get the paths we want to pre-render based on posts
     const paths = data.map((post) => ({
-        params: { id: post?.id?.toString() },
+        params: { id: post?.id?.toString()
+        }
     }))
 
     // We'll pre-render only these paths at build time.

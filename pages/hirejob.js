@@ -24,6 +24,8 @@ React.useEffect(() =>{
   }
 })
 
+console.log(router);
+
 const [subject, setSubject] = React.useState();
 const [description, setDescription] = React.useState();
 
@@ -127,7 +129,7 @@ const hendleHire =()=>{
                     onChange={(e) => setSubject(e.target.value)}
                   />
 
-                  <p for="inputtext5" class="form-label mt-3">
+                  {/* <p for="inputtext5" class="form-label mt-3">
                     Nama Lengkap
                   </p>
                   <input
@@ -137,9 +139,9 @@ const hendleHire =()=>{
                     aria-labelledby="textHelpBlock"
                     placeholder="Masukan nama lengkap"
                     style={{ fontSize: "14px" }}
-                  ></input>
+                  ></input> */}
 
-                  <p for="inputtext5" class="form-label  mt-3">
+                  {/* <p for="inputtext5" class="form-label  mt-3">
                     Email
                   </p>
                   <input
@@ -149,9 +151,9 @@ const hendleHire =()=>{
                     aria-labelledby="textHelpBlock"
                     placeholder="Masukan email"
                     style={{ fontSize: "14px" }}
-                  ></input>
+                  ></input> */}
 
-                  <p for="inputtext5" class="form-label mt-3">
+                  {/* <p for="inputtext5" class="form-label mt-3">
                     No Handphone
                   </p>
                   <input
@@ -161,7 +163,7 @@ const hendleHire =()=>{
                     aria-labelledby="textHelpBlock"
                     placeholder="masukan nomer handphone"
                     style={{ fontSize: "14px" }}
-                  ></input>
+                  ></input> */}
 
                   <p for="exampleFormControlTextarea1" class="form-label mt-3">
                     Deskripsi
@@ -181,7 +183,7 @@ const hendleHire =()=>{
                       style={{ fontSize: "14px" }}
                       onClick={hendleHire}
                     >
-                      Hire
+                      Kirim Pesan
                     </button>
                   </div>
                 </div>

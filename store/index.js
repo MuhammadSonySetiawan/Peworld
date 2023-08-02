@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage'
 import counterSlice from "./reducers/counterSlice";
 import dataAuth from "./reducers/dataAuth";
 
+
 const persistConfig = {
   key: 'root',
   storage,
@@ -19,6 +20,7 @@ const persistedReducer = persistReducer(persistConfig, reducers)
 
 export const store = configureStore({
   reducer: {
-    persistedReducer,dataAuth,
-  }, 
+    persistedReducer,
+    dataAuth,
+  },
 });
