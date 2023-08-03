@@ -13,6 +13,7 @@ function Profile() {
   const router = useRouter();
   const state = useSelector((state) => state);
 
+
  React.useEffect(() =>{
   if(Object.keys(state.dataAuth.data) == 0){
     router.push("/login")

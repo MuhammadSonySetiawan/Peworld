@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage'
 
 import counterSlice from "./reducers/counterSlice";
 import dataAuth from "./reducers/dataAuth";
+import hireSlice from "./reducers/hireSlice";
 
 
 const persistConfig = {
@@ -22,5 +23,6 @@ export const store = configureStore({
   reducer: {
     persistedReducer,
     dataAuth,
+    hireSlice,
   },
 });

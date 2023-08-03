@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import {useRouter} from "next/router";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
 
 import Navbar from '@/components/navbar';
 import Footer from "@/components/footer";
@@ -9,41 +11,47 @@ import Footer from "@/components/footer";
 import { BiMap } from "react-icons/bi";
 import axios from 'axios';
 
-function Profile(props) {
-  const [user, setUser] = React.useState("")
+import {sendHireTo} from '@/store/reducers/hireSlice'
+
+function Profile() {
   const router = useRouter();
   const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  const [user, setUser] = React.useState("");
   const [hire, setHire] = React.useState()
-// console.log(state)
-// console.log(location)
-  console.log(props)
-// console.log(router)
+  const [contact, setContact] = React.useState()
+
   React.useEffect(() =>{
     
     if(Object.keys(state?.dataAuth?.data).length == 0){
       router.push("/login")
     }else{
       setUser(state.dataAuth.data);
-      // console.log(state)
-      // console.log(router?.query?.id)
+
+      console.log(state)
       axios
       .get("https://hire-job.onrender.com/v1/job/")
       .then((response) => 
       console.log()
       )
-  //     const id = router?.query?.id
-  //     axios
-  //       .get("https://hire-job.onrender.com/v1/job/all")
-  //       .then((response) => console.log(response?.data?.data));
+      const id = router?.query?.id
+      axios
+        .get(`https://hire-job.onrender.com/v1/job/detail/${id}`)
+        .then((response) =>{ 
+        setContact(response?.data?.data)
+        dispatch(sendHireTo(response?.data?.data));
+      });
+        
   }
-  // console.log(parseInt(router?.query))
+
  },[])
 
  const handleHire =()=>{
   router?.query?.id;
   router.replace('../hirejob.js')
  }
-// console.log(state);
+
 
 let company = [...new Array(2)];
     return (
@@ -64,26 +72,26 @@ let company = [...new Array(2)];
               <div className="card p-4">
                 <div className="d-flex justify-content-center">
                   <img
-                    src={user.photo ?? "../public/auth.png"}
+                    src={contact?.photo ?? "../public/auth.png"}
                     alt="profile"
                     style={{
                       height: "150px",
                       width: "150px",
                       borderRadius: "50%",
                     }}
-                  /> 
+                  />
                 </div>
 
                 <h1 style={{ fontSize: "30px", marginTop: "30px" }}>
-                  {user.fullname} {router?.query?.id}
+                  {contact?.fullname} 
                 </h1>
-                <p>{user.job_title}</p>
+                <p>{contact?.job_title}</p>
                 <p classname="text-muted">
                   <BiMap /> {user?.domicile == 0 ? "tidak ada" : user?.domicile}
                 </p>
-                <p>{user?.company}</p>
+                <p>{contact?.company}</p>
 
-                <p className="text-black-50">{user?.description}</p>
+                <p className="text-black-50">{contact?.description}</p>
 
                 <Link
                   {...router?.query?.id}
@@ -96,11 +104,11 @@ let company = [...new Array(2)];
                 </Link>
 
                 <h2 style={{ fontSize: "18px" }}>Keterampilan</h2>
-                {user?.skills == 0 ? (
+                {contact?.skills == 0 ? (
                   "belum ada skill"
                 ) : (
                   <div className="d-inline">
-                    {user?.skills?.map((item, key) => (
+                    {contact?.skills?.map((item, key) => (
                       <span key={key} class="badge bg-warning mb-2 me-1 p-2 ">
                         {item}
                       </span>
@@ -124,7 +132,7 @@ let company = [...new Array(2)];
                 ) : (
                   <>
                     {" "}
-                    {user?.job_history?.map((item, key) => (
+                    {contact?.job_history?.map((item, key) => (
                       <div
                         className="row mt-4 descProfile d-flex flex-wrap"
                         key={key}

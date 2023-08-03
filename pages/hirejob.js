@@ -16,15 +16,20 @@ const [user, setUser] = React.useState("")
 const state = useSelector((state) => state)
 const router = useRouter()
 
+const [contact, setContact] = React.useState("");
+
+console.log(state?.hireSlice?.data);
+
 React.useEffect(() =>{
   if(Object.keys(state.dataAuth.data).lenght == 0){
     router.push("/login")
   }else{
     setUser(state.dataAuth.data)
+    setContact(state?.hireSlice?.data);
   }
 })
 
-console.log(router);
+// console.log(router);
 
 const [subject, setSubject] = React.useState();
 const [description, setDescription] = React.useState();
@@ -33,7 +38,7 @@ const hendleHire =()=>{
   const token = localStorage.getItem("token");
   axios
     .post(
-      "https://hire-job.onrender.com/v1/contact/1",
+      `https://hire-job.onrender.com/v1/contact/${contact?.id}`,
       {
         subject: subject,
         description: description,
@@ -51,10 +56,18 @@ const hendleHire =()=>{
         text: res?.data?.messages,
         icon: "success",
       });
-      console.log(res?.data?.messages);
-       router.push("/homeAkun");
+      console.log(res);
+      // dispatch(clearData());
+      router.push("/homeAkun");
     })
     .catch((err) => {
+      Swal.fire({
+        title: "Error!",
+        text:
+          err?.response?.data?.messages?.description?.message ??
+          err?.response?.data?.messages?.subject?.message,
+        icon: "error",
+      });
       console.log(err);
     });
 }
@@ -73,7 +86,7 @@ const hendleHire =()=>{
               <div className="card p-4">
                 <div className="d-flex justify-content-center">
                   <img
-                    src={user.photo}
+                    src={contact.photo}
                     alt="profile"
                     style={{
                       height: "150px",
@@ -84,19 +97,19 @@ const hendleHire =()=>{
                 </div>
 
                 <h1 style={{ fontSize: "30px", marginTop: "30px" }}>
-                  {user.fullname}
+                  {contact.fullname}
                 </h1>
-                <p>{user.job_title}</p>
+                <p>{contact.job_title}</p>
                 <p classname="text-muted">
-                  <BiMap /> {user.domicile}
+                  <BiMap /> {contact.domicile}
                 </p>
 
-                <p className="text-black-50">{user.description}</p>
+                <p className="text-black-50">{contact.description}</p>
 
                 <h2 style={{ fontSize: "18px" }}>Keterampilan</h2>
 
                 <div className="d-inline">
-                  {user?.skills?.map((item, key) => (
+                  {contact?.skills?.map((item, key) => (
                     <span key={key} class="badge bg-warning me-1 p-2 ">
                       {item}
                     </span>
@@ -109,7 +122,7 @@ const hendleHire =()=>{
             {/* strat content right */}
             <div className="col col-md-8">
               <div className="card p-4">
-                <h3>Hubungi {user.fullname}</h3>
+                <h3>Hubungi {contact.fullname}</h3>
                 <p>
                   Kirimkan pesan untuk rekruter yang sesuai dengan kriteria
                   perushaan anda.
