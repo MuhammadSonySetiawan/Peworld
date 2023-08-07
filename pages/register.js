@@ -14,10 +14,12 @@ function Registrasi() {
      const [job_title, setJob_title] = React.useState("")
      const [password, setPassword] = React.useState("");
      const [comfirmPassword, setComfirmPassword] = React.useState("");
+     const [isLoading, setIsLoading] = React.useState(false);
+
 
      const handleRegistrasi = (event) => {
        event.preventDefault();
-
+      setIsLoading(true);
       if (password == comfirmPassword && password.length >= 8) {
         axios
           .post("https://hire-job.onrender.com/v1/auth/register", {
@@ -28,7 +30,9 @@ function Registrasi() {
             job_title,
             password,
           })
-          .then(() => {
+          .then((res) => {
+            // console.log(res);
+
             Swal.fire({
               title: "Registration Success!",
               text: "Registration Success! Please Login",
@@ -37,14 +41,18 @@ function Registrasi() {
                router.push("/login")
             })
           })
-          .catch(({ error }) => {
-            console.log(error)
+          .catch(( error ) => {
+            console.log(error.response.data.messages);
            Swal.fire({
              title: "Error!",
-             text: error?.response?.data?.message ?? "Something wrong in our App!",
+             text: error?.response?.data?.messages ?? "Something wrong in our App!",
              icon: "error",
            });
-          });
+          })
+          .finally(() => {
+            setIsLoading(false);
+          })
+          
       }else if(password.length < 8){
         Swal.fire({
           title: "Error!",
@@ -73,10 +81,13 @@ function Registrasi() {
                   top: 40,
                   opacity: 0.8,
                   padding: "20px",
-                  marginTop: '-40px'
+                  marginTop: "-40px",
                 }}
               >
-                <h1 className="text-white">Temukan developer berbakat & terbaik di berbagai bidang keahlian</h1>
+                <h1 className="text-white">
+                  Temukan developer berbakat & terbaik di berbagai bidang
+                  keahlian
+                </h1>
               </div>
             </div>
 
@@ -85,47 +96,94 @@ function Registrasi() {
           <div class="col-md-6 p-4 inputRegister">
             <h2>Halo, Pewpeople</h2>
 
-            <form onSubmit={handleRegistrasi}>
+            <form onSubmit={handleRegistrasi} disabled={isLoading}>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">
                   Nama
                 </label>
-                <input type="text" class="form-control form-control-lg" id="exampleInputName" aria-describedby="namelHelp" placeholder="Masukan nama panjang" onChange={(e) => setFullname(e.target.value)} required />
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  id="exampleInputName"
+                  aria-describedby="namelHelp"
+                  placeholder="Masukan nama panjang"
+                  onChange={(e) => setFullname(e.target.value)}
+                  required
+                />
               </div>
 
               <div class="mb-3">
                 <label for="exampleInputEmail" class="form-label">
                   Email
                 </label>
-                <input type="enail" class="form-control form-control-lg" id="exampleInputEmail" placeholder="Masukan alamat email" onChange={(e) => setEmail(e.target.value)} required />
+                <input
+                  type="enail"
+                  class="form-control form-control-lg"
+                  id="exampleInputEmail"
+                  placeholder="Masukan alamat email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
               </div>
 
               <div class="mb-3">
                 <label for="exampleInputPhone" class="form-label">
-                  No Hendphone
+                  Nomor telepon
                 </label>
-                <input type="text" class="form-control form-control-lg" id="exampleInputPhone" aria-describedby="PhoneHelp" placeholder="Masukan no handphone" onChange={(e) => setPhone(e.target.value)} required />
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  id="exampleInputPhone"
+                  aria-describedby="PhoneHelp"
+                  placeholder="Masukan nomor telepon"
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
+                />
               </div>
 
               <div class="mb-3">
                 <label for="exampleInputcompany" class="form-label">
                   Nama Perusahaan
                 </label>
-                <input type="text" class="form-control form-control-lg" id="exampleInputCompany" aria-describedby="companyHelp" placeholder="Masukan nama perushaan" onChange={(e) => setCompany(e.target.value)} required />
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  id="exampleInputCompany"
+                  aria-describedby="companyHelp"
+                  placeholder="Masukan nama perushaan"
+                  onChange={(e) => setCompany(e.target.value)}
+                  required
+                />
               </div>
 
               <div class="mb-3">
                 <label for="exampleInputjob_title" class="form-label">
                   Jabatan
                 </label>
-                <input type="text" class="form-control form-control-lg" id="exampleInputJob_title" aria-describedby="job_titleHelp" placeholder="Masukan jabatan" onChange={(e) => setJob_title(e.target.value)} required />
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  id="exampleInputJob_title"
+                  aria-describedby="job_titleHelp"
+                  placeholder="Masukan jabatan"
+                  onChange={(e) => setJob_title(e.target.value)}
+                  required
+                />
               </div>
 
               <div class="mb-3">
                 <label for="exampleInputPassword" class="form-label">
                   Kata sandi
                 </label>
-                <input type="password" class="form-control form-control-lg" id="exampleInputPassword" aria-describedby="PasswordHelp" placeholder="Masukan kata sandi" onChange={(e) => setPassword(e.target.value)} required />
+                <input
+                  type="password"
+                  class="form-control form-control-lg"
+                  id="exampleInputPassword"
+                  aria-describedby="PasswordHelp"
+                  placeholder="Masukan kata sandi"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
               </div>
 
               <div class="mb-3">
@@ -145,13 +203,16 @@ function Registrasi() {
 
               <div className="d-grid">
                 <button type="submit" class="btn btn-primary btn-lg">
-                  Daftar
+                  {isLoading === true ? "Tunggu sebentar..." : "Daftar"}
                 </button>
               </div>
 
               <p className="text-center mt-3">
                 Anda sudah punya akun?{" "}
-                <Link href="/login" className="text-decoration-none text-warning">
+                <Link
+                  href="/login"
+                  className="text-decoration-none text-warning"
+                >
                   Masuk disini
                 </Link>
               </p>

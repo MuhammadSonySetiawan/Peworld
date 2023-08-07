@@ -30,18 +30,20 @@ function EditProfile() {
   const [lamaBekerja, setLamaBekerja] = React.useState("");
   const [descrip, setDescrip] = React.useState("");
   const [logo, setlogo] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+
 
   React.useEffect(() => {
     if (Object.keys(state.dataAuth.data) == 0) {
       router.push("/login");
     } else {
       setUser(state.dataAuth.data);
-      console.log(state.dataAuth);
     }
   });
 
   //Refress Update Profile
   const handleRefresh = () => {
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     axios
       .get("https://hire-job.onrender.com/v1/profile", {
@@ -56,11 +58,15 @@ function EditProfile() {
       })
       .catch((error) => {
         console.log(error);
-      });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   };
 
   //Start Update Profile
   const handleUpdate = () => {
+    // setIsLoading(true);
     const formData = new FormData();
     const token = localStorage.getItem("token");
     axios
@@ -87,19 +93,27 @@ function EditProfile() {
           text: response?.data?.messages,
           icon: "success",
         });
-        console.log(response);
         router.push("/profile");
 
         handleRefresh();
       })
       .catch((error) => {
-        console.log(error);
+        Swal.fire({
+          title: "Error!",
+          text: error.response.data.messages.description.message,
+          icon: "error",
+        });
+        console.log(error.response.data.messages.description.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
   //End Update Profile
 
   //Start Update Photo Profile
   const handlePhoto = (e) => {
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     axios
       .patch(
@@ -124,12 +138,16 @@ function EditProfile() {
       })
       .catch((err) => {
         console.log(err?.data?.messages);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
   //End Update Photo Profile
 
   // start add skill
   const handleSkills = () => {
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     axios
       .post(
@@ -153,12 +171,16 @@ function EditProfile() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
   // end add skill
 
   // start delete skill
   const handleSkillsDelete = (e) => {
+    setIsLoading(true);
     const idSkill = e?.target?.id;
     const token = localStorage.getItem("token");
     axios
@@ -177,12 +199,16 @@ function EditProfile() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
   // end delete skill
 
   // start add company
   const handleCompany = () => {
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     axios
       .post(
@@ -202,6 +228,7 @@ function EditProfile() {
         }
       )
       .then((res) => {
+        console.log(res)
         Swal.fire({
           title: "Successfully added!",
           text: res?.data?.messages,
@@ -210,13 +237,54 @@ function EditProfile() {
         handleRefresh();
       })
       .catch((err) => {
-        console.log(err);
+        console.log('gagal :', err.response.data.messages);
+        if(!logo && !posisi && !namaPerusahaan && !lamaBekerja && !descrip){
+          Swal.fire({
+             title: "Error!",
+             text: "Data tidak boleh kosong",
+             icon: "error",
+           });
+        }else if (!logo) {
+          Swal.fire({
+            title: "Error!",
+            text: 'masukan gambar',
+            icon: "error",
+          });
+        } else if (!posisi) {
+          Swal.fire({
+            title: "Error!",
+            text: err.response.data.messages.position.message,
+            icon: "error",
+          });
+        } else if (!namaPerusahaan) {
+          Swal.fire({
+            title: "Error!",
+            text: err.response.data.messages.company.message,
+            icon: "error",
+          });
+        } else if (!lamaBekerja) {
+          Swal.fire({
+            title: "Error!",
+            text: err.response.data.messages.date.message,
+            icon: "error",
+          });
+        } else if (!descrip) {
+          Swal.fire({
+            title: "Error!",
+            text: err.response.data.messages.description.message,
+            icon: "error",
+          });
+        } else{}
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
   // end add company
 
   // start delete company
   const handleCompanyDelete = (e) => {
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     const idDelleteCompany = e?.target?.id;
     axios
@@ -241,6 +309,9 @@ function EditProfile() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
   // end delete company
@@ -289,8 +360,11 @@ function EditProfile() {
                   class="btn btn-light"
                   onClick={handlePhoto}
                   {...user?.photo}
+                  disabled={isLoading}
                 >
-                  Edit
+                  {isLoading === true
+                    ? "Tunggu sebentar..."
+                    : "Edit foto Profil"}
                 </button>
               </p>
               <h5 style={{ fontSize: "20px", marginTop: "30px" }}>
@@ -308,8 +382,9 @@ function EditProfile() {
                   className="btn btn-primary btn-lg mt-4 mb-2"
                   style={{ width: "100%" }}
                   onClick={handleUpdate}
+                  disabled={isLoading}
                 >
-                  Simpan
+                  {isLoading === true ? "Tunggu sebentar..." : "Simpan"}
                 </button>
               </Link>
               <Link href="/profile">
@@ -433,8 +508,9 @@ function EditProfile() {
                   className="btn btn-warning text-light ms-3"
                   style={{ fontSize: "14px" }}
                   onClick={handleSkills}
+                  disabled={isLoading}
                 >
-                  Simpan
+                  {isLoading === true ? "Tunggu..." : "Simpan"}
                 </button>
               </div>
               {user?.skills == 0 ? (
@@ -538,8 +614,11 @@ function EditProfile() {
                       class="btn btn-outline-warning"
                       style={{ fontSize: "14px" }}
                       onClick={handleCompany}
+                      disabled={isLoading}
                     >
-                      Tambah pengalaman kerja
+                      {isLoading === true
+                        ? "Tunggu sebentar..."
+                        : "Tambah pengalaman kerja"}
                     </button>
                   </div>
                 </div>

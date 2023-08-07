@@ -16,6 +16,8 @@ const [jobs, setJobs] = React.useState()
 const [currentPage, setCurrentPage] = React.useState(1)
 const [totalPage, setTotalPage] = React.useState(props?.request?.data?.total_page)
 const [data, setData] = React.useState(props?.request?.data?.rows)
+const [isLoading, setIsLoading] = React.useState(false);
+
 
 const hendleHire =(e)=>{
   console.log(e.target)

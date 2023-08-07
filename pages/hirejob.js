@@ -11,12 +11,14 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 
+
 function Hirejob() {
 const [user, setUser] = React.useState("")
 const state = useSelector((state) => state)
 const router = useRouter()
 
 const [contact, setContact] = React.useState("");
+const [isLoading, setIsLoading] = React.useState(false);
 
 console.log(state?.hireSlice?.data);
 
@@ -35,6 +37,7 @@ const [subject, setSubject] = React.useState();
 const [description, setDescription] = React.useState();
 
 const hendleHire =()=>{
+  setIsLoading(true);
   const token = localStorage.getItem("token");
   axios
     .post(
@@ -69,6 +72,9 @@ const hendleHire =()=>{
         icon: "error",
       });
       console.log(err);
+    })
+    .finally(() => {
+      setIsLoading(false);
     });
 }
 
@@ -195,8 +201,12 @@ const hendleHire =()=>{
                       class="btn btn-warning text-light "
                       style={{ fontSize: "14px" }}
                       onClick={hendleHire}
+                      disabled={isLoading}
                     >
                       Kirim Pesan
+                      {isLoading === true
+                        ? "Sedang mengirim..."
+                        : "Kirim Pesan"}
                     </button>
                   </div>
                 </div>
