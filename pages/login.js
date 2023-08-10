@@ -54,11 +54,11 @@ function Login() {
 
             router.push("/profile");
           })
-          .catch(({ error }) => {
+          .catch(( error ) => {
             setErrMsg(
-              error?.response?.data?.message ?? "Something wrong in our server"
+              error.response.data.messages ?? "Something wrong in our server"
             );
-            console.log(error);
+            console.log(error.response.data.messages);
           })
           .finally(() => {
             setIsLoading(false);
