@@ -1,17 +1,17 @@
 <img width="840" src="./screenshot/allDevice.png" border="0" alt="Landing Page" />
 <br>
 
-# Hire Job
-Hire Job Website is a platform designed to assist companies in finding candidates that match their specific criteria. This application utilizes a postgresQL database, Express JS for backend development, and incorporates Next.js, Bootstrap 5, axios, and Redux libraries for frontend development.
+# Peworld
+Peworld Website is a platform designed to assist companies in finding candidates that match their specific criteria. This application utilizes a postgresQL database, Express JS for backend development, and incorporates Next.js, Bootstrap 5, axios, and Redux libraries for frontend development.
 ## Instal
-The Hire Job website can run on your local machine. To do this, download this repository and open it using Visual Studio Code. Then, run the terminal with the following commands below.
+The Peworld website can run on your local machine. To do this, download this repository and open it using Visual Studio Code. Then, run the terminal with the following commands below.
 ```sh
 cd food-recipe-fe-react
 npm i
 npm run dev
 ```
 
-## Fitures Aplikasi Pijar Food FE
+## Fitures Website Peworld
 - Candidate job search
 - Worker profile editing
 - Worker list registration
@@ -25,7 +25,7 @@ npm run dev
 - [JavaScript] - The programming used in website development to make it more dynamic and interactive.
 - [Sweetalert2](https://sweetalert2.github.io/) - JavaScript library that provides various options for creating different types of pop-up alerts, such as regular alerts, error alerts, success alerts, confirmation alerts, and more.
 - [Next JS](https://nextjs.org/) - A framework for React.js that is suitable for building websites with various outstanding features such as Routing Pages and Fast Refresh.
-- [Redux] (https://redux.js.org/) - One of the libraries commonly used for backend purposes.
+- [Redux](https://redux.js.org/) - One of the libraries commonly used for backend purposes.
 - [Redux Toolkit](https://redux-toolkit.js.org/) - The official tool provided by the Redux team to facilitate the use of Redux in an application.
 - [Axios](https://axios-http.com/docs/intro) - A United States news website based in Arlington County, Virginia.
 
@@ -77,8 +77,8 @@ npm run dev
 
 ## Related Project
 
-- [`Frontend Recipe Food`](https://github.com/MuhammadSonySetiawan/hirejob)
+- [`Frontend Peworld`](https://github.com/MuhammadSonySetiawan/hirejob)
 
-- [`Backend Recipe Food`](https://github.com/MuhammadSonySetiawan/hire_job_be)
+- [`Backend Peworld`](https://github.com/MuhammadSonySetiawan/hire_job_be)
 
-- [`Demo Recipe Food`](https://hirejob-ep6k.vercel.app/)
+- [`Demo Peworld`](https://hirejob-ep6k.vercel.app/)
