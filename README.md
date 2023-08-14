@@ -77,8 +77,8 @@ npm run dev
 
 ## Related Project
 
-- [`Frontend Peworld`](https://github.com/MuhammadSonySetiawan/hirejob)
+- [`Frontend Peworld`](https://github.com/MuhammadSonySetiawan/Peworld)
 
 - [`Backend Peworld`](https://github.com/MuhammadSonySetiawan/hire_job_be)
 
-- [`Demo Peworld`](https://hirejob-ep6k.vercel.app/)
+- [`Demo Peworld`](https://peworld-lilac.vercel.app/)
