@@ -33,7 +33,7 @@ export default function Home() {
             </div>
 
             <div className="col-md-5 mb-3">
-              <div
+              {/* <div
                 className="position-absolute bgHome"
                 style={{
                   marginTop: "10px",
@@ -42,10 +42,10 @@ export default function Home() {
                   backgroundColor: "#E5E5E5",
                   transform: "rotate(20deg)",
                 }}
-              ></div>
-              <div className="position-relative img-fluid">
+              ></div> */}
+              <div className="position-relative img-fluid herroMargin">
                 <img
-                  src="/home_1.jpg"
+                  src="/home_1.png"
                   alt="Home Picture"
                   className="img-fluid rounded"
                   style={{ alignSelf: "center" }}
@@ -58,10 +58,10 @@ export default function Home() {
 
         {/* Why Peeworld */}
         <section className="container mt-5" style={{ marginBottom: "5%" }}>
-          <div className="row">
+          <div className="row herroMargin">
             <div className="col-md-5">
               <img
-                src="/home_2.jpg"
+                src="/home_2.png"
                 alt="Home Picture"
                 className="img-fluid mb-2 rounded"
               />
@@ -127,7 +127,7 @@ export default function Home() {
             </div>
 
             <div className="col-md-5 mb-3">
-              <div
+              {/* <div
                 className="position-absolute bgHome"
                 style={{
                   marginTop: "15px",
@@ -137,10 +137,10 @@ export default function Home() {
                   backgroundColor: "#E5E5E5",
                   transform: "rotate(20deg)",
                 }}
-              ></div>
+              ></div> */}
               <div className="position-relative img-fluid">
                 <img
-                  src="/home_3.jpg"
+                  src="/home_3.png"
                   alt="Home Picture"
                   className="img-fluid rounded"
                   style={{ alignSelf: "center" }}

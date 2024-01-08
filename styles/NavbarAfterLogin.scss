@@ -16,6 +16,8 @@
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
         padding: 5px;
+        margin-top: 5px;
+        right: 0;
     }
 
     .dropdownContent Link {
@@ -33,4 +35,12 @@
     .dropdown:hover .dropdownContent {
         display: block;
     }
+    .menuNavbar{
+        font-size: 13px;
+    }
 }
+ @media only screen and (max-width: 768px) {
+    .navbarMargin{
+        margin-bottom: 1em;
+    }
+ }

@@ -20,16 +20,9 @@ function Login() {
 
 
       React.useEffect(() => {
-        // const storedToken = localStorage.getItem("auth")
-        // console.log(storedToken)
-
         if (Object?.keys(state?.dataAuth?.data).length != 0) {
           router.push("profile");
         }
-        
-        // if(localStorage.getItem("auth") == "True"){
-        //   router.push("/profile")
-        // }
       })
 
       const handleLogin = (event) => {
@@ -42,23 +35,15 @@ function Login() {
           })
           .then((response) => {
             const token = response?.data?.data.token;
-            console.log(response.data.data.user);
-            dispatch(eddAuth(response.data.data.user));
-            // localStorage.setItem("user", "True");
+            dispatch(eddAuth(response?.data?.data?.user));
             localStorage.setItem("token", token);
-            console.log(token);
-
-            // token = response?.data?.data.token
-            // console.log(response?.data?.data.token);
-            // document.cookie = `token= ${token}; path=/dashnboard`;
-
             router.push("/profile");
           })
           .catch(( error ) => {
             setErrMsg(
-              error.response.data.messages ?? "Something wrong in our server"
+              error?.response?.data?.messages ?? "Something wrong in our server"
             );
-            console.log(error.response.data.messages);
+            console.log(error?.response?.data?.messages);
           })
           .finally(() => {
             setIsLoading(false);

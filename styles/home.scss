@@ -1,3 +1,7 @@
+*{
+    font-family: sans-serif;
+}
+
 #home_page{
     @media only screen and (max-width: 768px) {
         .bgHome{
@@ -12,6 +16,10 @@
         }  
         header{
             height: 80vh;
+        }
+
+        .herroMargin{
+            margin-top: 200px;
         }
 
         .bgButton{

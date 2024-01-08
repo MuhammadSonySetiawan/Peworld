@@ -14,9 +14,6 @@ function Navbar() {
   
   const hendleLogout = () =>{
     localStorage.clear()
-
-    // router.push("/login"); 
-    // router.replace("/login")
     window.location.href = "/login"
   }
 
@@ -30,14 +27,10 @@ function Navbar() {
 
   const hendlePhoto = (event) =>{
     event(dataUser.photo)
-    // if (state.dataAuth.data != null) {
-    // } else {
-    //   ("/fotoProfile.webp");
-    // }
   }
 
     return (
-      <div className="bg-white pb-3">
+      <div className="bg-white navbarMargin pb-3">
         <nav className="container pt-3">
           <div className="d-flex justify-content-between align-items-center">
             <Link href="/">
@@ -76,23 +69,24 @@ function Navbar() {
                     }}
                   />
                   <div className="dropdownContent card" style={{ right: 0 }}>
-                    <Link href="/profile" className="mb-2 text-decoration-none">
+                    <Link href="/profile" className="mb-2 text-decoration-none color-primary menuNavbar">
                       Profile
                     </Link>
                     <br />
-                    <Link href="/editProfile" className="mb-2 text-decoration-none">
+                    <Link href="/editProfile" className="mb-2 text-decoration-none color-primary menuNavbar">
                       Edit Profile
                     </Link>
                     <br />
-                    <Link href="/homeAkun" className="mb-2 text-decoration-none">
+                    <Link href="/homeAkun" className="mb-2 text-decoration-none color-primary menuNavbar">
                       Top Job
                     </Link>
                     <br />
-                    <Link href="" className="mb-2 text-decoration-none" onClick={hendleLogout}>
+                    <Link href="" className="mb-2 text-decoration-none color-primary menuNavbar" onClick={hendleLogout}>
                       Logout
                     </Link>
                   </div>
                 </div>
+                
               </div>
             ) : (
               <div>

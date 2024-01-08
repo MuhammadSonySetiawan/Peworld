@@ -31,8 +31,6 @@ function Registrasi() {
             password,
           })
           .then((res) => {
-            // console.log(res);
-
             Swal.fire({
               title: "Registration Success!",
               text: "Registration Success! Please Login",
@@ -42,7 +40,6 @@ function Registrasi() {
             })
           })
           .catch(( error ) => {
-            // console.log(error.response.data.messages.job_title.message);
             Swal.fire({
               title: "Error!",
               text:
@@ -51,14 +48,6 @@ function Registrasi() {
                 "Something wrong in our App!",
               icon: "error",
             }); 
-            // ??
-            //   Swal.fire({
-            //     title: "Error!",
-            //     text:
-            //       error?.response?.data?.messages ??
-            //       "Something wrong in our App!",
-            //     icon: "error",
-            //   });
           })
           .finally(() => {
             setIsLoading(false);
